@@ -59,10 +59,17 @@ namespace UKControllerPlugin {
     {
         CurlResponse response = curl.MakeCurlRequest(request);
 
-        if (response.IsCurlError() || !response.StatusOk()) {
-            LogError("Error when downloading binary");
+        if (response.IsCurlError()) {
+            LogError("Error from cURL when downloading binary");
             return false;
         }
+
+if (!response.StatusOk()) {
+LogError("Server responded with error when downloading binary");
+LogError(std::string("URI: ") + request.GetUri());
+LogError(std::string("Response: ") + response.GetResponse());
+return false;
+}
 
         if (response.GetResponse().empty()) {
             LogError("Error when downloading binary, was empty");
