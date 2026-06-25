@@ -206,8 +206,8 @@
 #define IDC_GEN_SETTINGS_EXPERIMENTAL   1142
 #define IDC_RELEASE_CHANNEL             1143
 #define IDC_API_KEY_STATIC              1144
-#define IDC_                            1145
 #define IDC_RELEASE_CHAT_MESSAGE        1145
+#define IDC_COLOUR_PALETTE              1146
 
 // Next default values for new objects
 // 
