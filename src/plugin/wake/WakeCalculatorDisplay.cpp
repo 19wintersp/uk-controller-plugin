@@ -1,9 +1,9 @@
+#include "WakeCalculatorDisplay.h"
 #include "ArrivalWakeInterval.h"
 #include "DepartureWakeInterval.h"
-#include "WakeCalculatorDisplay.h"
+#include "WakeCalculatorOptions.h"
 #include "WakeCategory.h"
 #include "WakeCategoryMapperInterface.h"
-#include "WakeCalculatorOptions.h"
 #include "WakeIntervalFormatter.h"
 #include "components/ClickableArea.h"
 #include "components/CollapsibleWindowTitleBar.h"
@@ -29,13 +29,12 @@ namespace UKControllerPlugin::Wake {
         int screenObjectId)
         : options(std::move(options)), leadCallsignSelector(std::move(leadCallsignSelector)),
           followCallsignSelector(std::move(followCallsignSelector)), wakeSchemeSelector(std::move(wakeSchemeSelector)),
-          plugin(plugin), titleBar(
-                              Components::CollapsibleWindowTitleBar::Create(
-                                  L"Wake Turbulence Calculator",
-                                  TitleBarArea(),
-                                  [this]() -> bool { return this->contentCollapsed; },
-                                  screenObjectId,
-                                  brushes)),
+          plugin(plugin), titleBar(Components::CollapsibleWindowTitleBar::Create(
+                              L"Wake Turbulence Calculator",
+                              TitleBarArea(),
+                              [this]() -> bool { return this->contentCollapsed; },
+                              screenObjectId,
+                              brushes)),
           brushes(brushes),
           leadClickspot(Components::ClickableArea::Create(leadTextArea, screenObjectId, "leadcallsign", false)),
           followingClickspot(
@@ -356,8 +355,9 @@ namespace UKControllerPlugin::Wake {
     }
 
     auto WakeCalculatorDisplay::RelevantInterval(
-        const WakeCategory& lead, const WakeCategory& following, bool intermediate) const
-        -> std::shared_ptr<WakeIntervalInterface>
+        const WakeCategory& lead,
+        const WakeCategory& following,
+        bool intermediate) const -> std::shared_ptr<WakeIntervalInterface>
     {
         return options->Departures()
                    ? static_cast<std::shared_ptr<WakeIntervalInterface>>(

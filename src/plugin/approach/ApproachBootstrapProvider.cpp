@@ -1,7 +1,7 @@
+#include "ApproachBootstrapProvider.h"
 #include "AircraftSelectionProvider.h"
 #include "AirfieldMinimumSeparationSelectorList.h"
 #include "AirfieldTargetSelectorList.h"
-#include "ApproachBootstrapProvider.h"
 #include "ApproachFlightplanEventHandler.h"
 #include "ApproachModuleFactory.h"
 #include "ApproachSequencerDisplay.h"
@@ -21,12 +21,12 @@
 #include "euroscope/AsrEventHandlerCollection.h"
 #include "euroscope/PluginSettingsProviderCollection.h"
 #include "flightplan/FlightPlanEventHandlerCollection.h"
+#include "graphics/GdiplusBrushes.h"
 #include "list/PopupListFactory.h"
 #include "radarscreen/MenuToggleableDisplayFactory.h"
 #include "radarscreen/RadarRenderableCollection.h"
 #include "tag/TagItemCollection.h"
 #include "timedevent/TimedEventCollection.h"
-#include "graphics/GdiplusBrushes.h"
 
 using UKControllerPlugin::Windows::GdiplusBrushes;
 
@@ -34,9 +34,8 @@ namespace UKControllerPlugin::Approach {
 
     void ApproachBootstrapProvider::BootstrapPlugin(Bootstrap::PersistenceContainer& container)
     {
-        container.pluginSettingsProviders->AddProvider(
-            std::make_shared<ApproachSequencerOptionsLoader>(
-                container.moduleFactories->Approach().SequencerOptions(), *container.airfields));
+        container.pluginSettingsProviders->AddProvider(std::make_shared<ApproachSequencerOptionsLoader>(
+            container.moduleFactories->Approach().SequencerOptions(), *container.airfields));
 
         container.timedHandler->RegisterEvent(
             std::make_shared<RemoveLandedAircraft>(

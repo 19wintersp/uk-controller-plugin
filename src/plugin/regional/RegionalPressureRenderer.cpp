@@ -1,5 +1,5 @@
-#include "RegionalPressureManager.h"
 #include "RegionalPressureRenderer.h"
+#include "RegionalPressureManager.h"
 #include "euroscope/EuroscopeRadarLoopbackInterface.h"
 #include "euroscope/UserSetting.h"
 #include "graphics/GdiGraphicsInterface.h"

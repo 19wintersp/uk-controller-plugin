@@ -1,7 +1,7 @@
+#include "RadarScreenFactory.h"
 #include "ConfigurableDisplayCollection.h"
 #include "MenuToggleableDisplayFactory.h"
 #include "PositionResetCommand.h"
-#include "RadarScreenFactory.h"
 #include "ScreenControlsBootstrap.h"
 #include "UKRadarScreen.h"
 #include "api/BootstrapApi.h"

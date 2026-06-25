@@ -1,17 +1,17 @@
-#include "euroscope/UserSetting.h"
-#include "hold/AbstractHoldLevelRestriction.h"
-#include "hold/DeemedSeparatedHold.h"
 #include "hold/HoldDisplay.h"
-#include "navaids/Navaid.h"
-#include "hold/HoldManager.h"
-#include "dialog/DialogManager.h"
 #include "dialog/DialogData.h"
-#include "hold/HoldingAircraft.h"
-#include "hold/CompareHoldingAircraft.h"
-#include "hold/HoldingData.h"
-#include "hold/PublishedHoldCollection.h"
+#include "dialog/DialogManager.h"
+#include "euroscope/UserSetting.h"
 #include "graphics/GdiplusBrushes.h"
+#include "hold/AbstractHoldLevelRestriction.h"
+#include "hold/CompareHoldingAircraft.h"
+#include "hold/DeemedSeparatedHold.h"
+#include "hold/HoldManager.h"
+#include "hold/HoldingAircraft.h"
+#include "hold/HoldingData.h"
 #include "hold/ProximityHold.h"
+#include "hold/PublishedHoldCollection.h"
+#include "navaids/Navaid.h"
 
 using testing::_;
 using testing::NiceMock;
@@ -608,9 +608,8 @@ namespace UKControllerPluginTest {
                 this->display.GetDisplayPos().x, this->display.GetDisplayPos().y, this->display.windowWidth, 380};
             std::map<int, std::set<std::shared_ptr<HoldingAircraft>, CompareHoldingAircraft>> aircraft;
             aircraft[7000].insert(std::make_shared<HoldingAircraft>("BAW123", "TIMBA"));
-            aircraft[7000].insert(
-                std::make_shared<HoldingAircraft>(
-                    "EZY234", std::make_shared<ProximityHold>("BAW123", "TIMBA", std::chrono::system_clock::now())));
+            aircraft[7000].insert(std::make_shared<HoldingAircraft>(
+                "EZY234", std::make_shared<ProximityHold>("BAW123", "TIMBA", std::chrono::system_clock::now())));
             aircraft[8000].insert(std::make_shared<HoldingAircraft>("VIR25A", "TIMBA"));
             aircraft[8000].insert(std::make_shared<HoldingAircraft>("LOT123", "TIMBA"));
             aircraft[8000].insert(std::make_shared<HoldingAircraft>("RYR93", "TIMBA"));
@@ -625,12 +624,10 @@ namespace UKControllerPluginTest {
         {
             std::set<std::shared_ptr<HoldingAircraft>, CompareHoldingAircraft> aircraft;
             aircraft.insert(std::make_shared<HoldingAircraft>("BAW123", "TIMBA"));
-            aircraft.insert(
-                std::make_shared<HoldingAircraft>(
-                    "EZY234", std::make_shared<ProximityHold>("EZY234", "TIMBA", std::chrono::system_clock::now())));
-            aircraft.insert(
-                std::make_shared<HoldingAircraft>(
-                    "VIR25A", std::make_shared<ProximityHold>("VIR25A", "TIMBA", std::chrono::system_clock::now())));
+            aircraft.insert(std::make_shared<HoldingAircraft>(
+                "EZY234", std::make_shared<ProximityHold>("EZY234", "TIMBA", std::chrono::system_clock::now())));
+            aircraft.insert(std::make_shared<HoldingAircraft>(
+                "VIR25A", std::make_shared<ProximityHold>("VIR25A", "TIMBA", std::chrono::system_clock::now())));
             aircraft.insert(std::make_shared<HoldingAircraft>("RYR191", "TIMBA"));
             aircraft.insert(std::make_shared<HoldingAircraft>("BMI234", "TIMBA"));
             aircraft.insert(std::make_shared<HoldingAircraft>("LOT555", "TIMBA"));

@@ -1,11 +1,11 @@
 #include "GeneralSettingsDialog.h"
 #include "GeneralSettingsEntries.h"
-#include "UserSettingAwareCollection.h"
 #include "UserSetting.h"
+#include "UserSettingAwareCollection.h"
 #include "dialog/DialogCallArgument.h"
-#include "setting/SettingRepository.h"
 #include "graphics/GdiplusBrushes.h"
 #include "graphics/Theme.h"
+#include "setting/SettingRepository.h"
 #include <bit>
 
 using UKControllerPlugin::Dialog::DialogCallArgument;

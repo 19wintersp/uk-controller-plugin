@@ -1,3 +1,4 @@
+#include "HoldModule.h"
 #include "AbstractHoldLevelRestriction.h"
 #include "AircraftEnteredHoldingAreaEventHandler.h"
 #include "AircraftExitedHoldingAreaEventHandler.h"
@@ -10,7 +11,6 @@
 #include "HoldDisplayManager.h"
 #include "HoldEventHandler.h"
 #include "HoldManager.h"
-#include "HoldModule.h"
 #include "HoldRenderer.h"
 #include "HoldSelectionMenu.h"
 #include "PublishedHoldCollection.h"
@@ -25,17 +25,17 @@
 #include "dialog/DialogManager.h"
 #include "euroscope/AsrEventHandlerCollection.h"
 #include "euroscope/CallbackFunction.h"
+#include "graphics/GdiplusBrushes.h"
 #include "message/UserMessager.h"
 #include "plugin/FunctionCallEventHandler.h"
 #include "plugin/UKPlugin.h"
 #include "push/PushEventProcessorCollection.h"
 #include "radarscreen/ConfigurableDisplayCollection.h"
-#include "task/TaskRunnerInterface.h"
-#include "tag/TagItemCollection.h"
 #include "tag/TagFunction.h"
+#include "tag/TagItemCollection.h"
+#include "task/TaskRunnerInterface.h"
 #include "timedevent/TimedEventCollection.h"
 #include "windows/WinApiInterface.h"
-#include "graphics/GdiplusBrushes.h"
 
 using UKControllerPlugin::Api::ApiException;
 using UKControllerPlugin::Api::ApiInterface;

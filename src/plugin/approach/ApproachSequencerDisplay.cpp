@@ -1,8 +1,8 @@
+#include "ApproachSequencerDisplay.h"
 #include "AirfieldApproachOptions.h"
 #include "ApproachSequence.h"
 #include "ApproachSequencedAircraft.h"
 #include "ApproachSequencer.h"
-#include "ApproachSequencerDisplay.h"
 #include "ApproachSequencerDisplayOptions.h"
 #include "ApproachSequencerOptions.h"
 #include "ApproachSpacingCalculator.h"
@@ -13,11 +13,11 @@
 #include "euroscope/EuroscopePluginLoopbackInterface.h"
 #include "graphics/FontManager.h"
 #include "graphics/GdiGraphicsInterface.h"
+#include "graphics/GdiplusBrushes.h"
 #include "graphics/StringFormatManager.h"
 #include "helper/HelperFunctions.h"
 #include "list/PopupListInterface.h"
 #include "number/NumberFormat.h"
-#include "graphics/GdiplusBrushes.h"
 
 using UKControllerPlugin::Components::CollapsibleWindowTitleBar;
 using UKControllerPlugin::Number::To1Dp;
@@ -44,24 +44,20 @@ namespace UKControllerPlugin::Approach {
           callsignSelector(std::move(callsignSelector)), targetSelector(std::move(targetSelector)),
           airfieldTargetSelector(std::move(airfieldTargetSelector)),
           airfieldSeparationSelector(std::move(airfieldSeparationSelector)), plugin(plugin), brushes(brushes),
-          screenObjectId(screenObjectId), titleBar(
-                                              CollapsibleWindowTitleBar::Create(
-                                                  L"Approach Sequencer",
-                                                  titleBarArea,
-                                                  [this]() -> bool { return this->displayOptions->ContentCollapsed(); },
-                                                  screenObjectId,
-                                                  brushes)),
-          airfieldClickspot(
-              Components::ClickableArea::Create(
-                  this->airfieldTextArea, screenObjectId, AIRFIELD_SELECTOR_CLICKSPOT, false)),
+          screenObjectId(screenObjectId), titleBar(CollapsibleWindowTitleBar::Create(
+                                              L"Approach Sequencer",
+                                              titleBarArea,
+                                              [this]() -> bool { return this->displayOptions->ContentCollapsed(); },
+                                              screenObjectId,
+                                              brushes)),
+          airfieldClickspot(Components::ClickableArea::Create(
+              this->airfieldTextArea, screenObjectId, AIRFIELD_SELECTOR_CLICKSPOT, false)),
           addClickspot(
               Components::ClickableArea::Create(this->addButton, screenObjectId, ADD_AIRCRAFT_CLICKSPOT, false)),
-          airfieldTargetClickspot(
-              Components::ClickableArea::Create(
-                  this->airfieldTargetTextArea, screenObjectId, AIRFIELD_TARGET_CLICKSPOT, false)),
-          airfieldSeparationClickspot(
-              Components::ClickableArea::Create(
-                  this->airfieldSeparationTextArea, screenObjectId, AIRFIELD_SEPARATION_CLICKSPOT, false))
+          airfieldTargetClickspot(Components::ClickableArea::Create(
+              this->airfieldTargetTextArea, screenObjectId, AIRFIELD_TARGET_CLICKSPOT, false)),
+          airfieldSeparationClickspot(Components::ClickableArea::Create(
+              this->airfieldSeparationTextArea, screenObjectId, AIRFIELD_SEPARATION_CLICKSPOT, false))
     {
     }
 

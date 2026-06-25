@@ -1,6 +1,6 @@
-﻿#include "AbstractHoldLevelRestriction.h"
+﻿#include "HoldDisplay.h"
+#include "AbstractHoldLevelRestriction.h"
 #include "DeemedSeparatedHold.h"
-#include "HoldDisplay.h"
 #include "HoldDisplayFunctions.h"
 #include "HoldManager.h"
 #include "HoldModule.h"
@@ -17,9 +17,9 @@
 #include "geometry/Measurement.h"
 #include "geometry/MeasurementUnit.h"
 #include "graphics/GdiGraphicsInterface.h"
+#include "graphics/GdiplusBrushes.h"
 #include "list/PopupListInterface.h"
 #include "navaids/Navaid.h"
-#include "graphics/GdiplusBrushes.h"
 
 using UKControllerPlugin::Dialog::DialogManager;
 using UKControllerPlugin::Euroscope::EuroScopeCFlightPlanInterface;

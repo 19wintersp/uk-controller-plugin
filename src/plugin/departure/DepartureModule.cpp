@@ -1,6 +1,6 @@
+#include "DepartureModule.h"
 #include "AircraftDepartedEvent.h"
 #include "DepartureCoordinationList.h"
-#include "DepartureModule.h"
 #include "DepartureMonitor.h"
 #include "ToggleDepartureCoordinationList.h"
 #include "UserShouldClearDepartureDataMonitor.h"

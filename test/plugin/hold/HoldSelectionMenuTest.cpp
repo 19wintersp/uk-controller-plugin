@@ -1,18 +1,18 @@
+#include "hold/HoldSelectionMenu.h"
 #include "aircraft/CallsignSelectionListFactory.h"
 #include "dialog/DialogManager.h"
 #include "euroscope/UserSetting.h"
+#include "graphics/GdiplusBrushes.h"
 #include "hold/AbstractHoldLevelRestriction.h"
 #include "hold/DeemedSeparatedHold.h"
-#include "hold/HoldingAircraft.h"
-#include "hold/HoldManager.h"
 #include "hold/HoldDisplay.h"
-#include "hold/HoldDisplayManager.h"
 #include "hold/HoldDisplayFactory.h"
-#include "hold/HoldSelectionMenu.h"
+#include "hold/HoldDisplayManager.h"
+#include "hold/HoldManager.h"
+#include "hold/HoldingAircraft.h"
 #include "hold/PublishedHoldCollection.h"
 #include "list/PopupListFactory.h"
 #include "navaids/NavaidCollection.h"
-#include "graphics/GdiplusBrushes.h"
 #include "plugin/FunctionCallEventHandler.h"
 using ::testing::_;
 using ::testing::InSequence;
@@ -111,11 +111,10 @@ namespace UKControllerPluginTest {
             displayManager1->AsrLoadedEvent(this->userSetting);
             displayManager2->AsrLoadedEvent(this->userSetting);
             displayManager1->LoadSelectedHolds(std::vector<std::string>({"TIMBA", "WILLO"}));
-            displayManager2->LoadSelectedHolds(
-                std::vector<std::string>({
-                    "WILLO",
-                    "MAY",
-                }));
+            displayManager2->LoadSelectedHolds(std::vector<std::string>({
+                "WILLO",
+                "MAY",
+            }));
             this->holdSelectionMenu.AddDisplayManager(displayManager1);
             this->holdSelectionMenu.AddDisplayManager(displayManager2);
 

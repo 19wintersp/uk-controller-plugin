@@ -1,10 +1,10 @@
+#include "departure/ToggleDepartureCoordinationList.h"
 #include "collection/Collection.h"
 #include "controller/ActiveCallsignCollection.h"
 #include "controller/ControllerPositionCollection.h"
 #include "departure/DepartureCoordinationList.h"
-#include "departure/ToggleDepartureCoordinationList.h"
-#include "graphics/GdiplusBrushes.h"
 #include "dialog/DialogManager.h"
+#include "graphics/GdiplusBrushes.h"
 #include "message/UserMessager.h"
 #include "prenote/PrenoteMessageCollection.h"
 #include "releases/DepartureReleaseEventHandler.h"
@@ -35,9 +35,8 @@ namespace UKControllerPluginTest::Departure {
                   messager,
                   103,
                   104),
-              brushes(), list(
-                             std::make_shared<DepartureCoordinationList>(
-                                 handler, prenotes, mockPlugin, controllers, activeCallsigns, brushes, 3)),
+              brushes(), list(std::make_shared<DepartureCoordinationList>(
+                             handler, prenotes, mockPlugin, controllers, activeCallsigns, brushes, 3)),
               dialogManager(dialogProvider)
         {
         }

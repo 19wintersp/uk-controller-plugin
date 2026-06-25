@@ -1,11 +1,11 @@
+#include "departure/DepartureCoordinationList.h"
 #include "collection/Collection.h"
 #include "controller/ActiveCallsignCollection.h"
 #include "controller/ControllerPosition.h"
 #include "controller/ControllerPositionCollection.h"
-#include "departure/DepartureCoordinationList.h"
-#include "graphics/GdiplusBrushes.h"
 #include "dialog/DialogManager.h"
 #include "euroscope/UserSetting.h"
+#include "graphics/GdiplusBrushes.h"
 #include "message/UserMessager.h"
 #include "prenote/PrenoteMessageCollection.h"
 #include "releases/DepartureReleaseEventHandler.h"
@@ -24,9 +24,8 @@ namespace UKControllerPluginTest::Departure {
         public:
         DepartureCoordinationListTest()
             : userSettings(mockAsrProvider), messager(mockPlugin),
-              list(
-                  std::make_shared<DepartureCoordinationList>(
-                      handler, prenotes, mockPlugin, controllers, activeCallsigns, brushes, 3)),
+              list(std::make_shared<DepartureCoordinationList>(
+                  handler, prenotes, mockPlugin, controllers, activeCallsigns, brushes, 3)),
               handler(
                   std::make_shared<UKControllerPlugin::Releases::DepartureReleaseRequestCollection>(),
                   mockApi,
