@@ -1,9 +1,6 @@
 #pragma once
 
-#include <map>
-#include <string>
-
-namespace UKControllerPlugin {
+/* namespace UKControllerPlugin {
     namespace Euroscope {
         class UserSetting;
         class UserSettingAwareCollection;
@@ -18,7 +15,7 @@ namespace UKControllerPlugin {
     namespace Windows {
         struct GdiplusBrushes;
     } // namespace Windows
-} // namespace UKControllerPlugin
+} // namespace UKControllerPlugin */
 
 namespace UKControllerPlugin::Euroscope {
 
@@ -28,12 +25,7 @@ namespace UKControllerPlugin::Euroscope {
     class GeneralSettingsDialog
     {
         public:
-        GeneralSettingsDialog(
-            UKControllerPlugin::Euroscope::UserSetting& userSettings,
-            const UKControllerPlugin::Euroscope::UserSettingAwareCollection& userSettingsHandlers,
-            Setting::SettingRepository& settings,
-            UKControllerPlugin::Windows::GdiplusBrushes& brushes);
-        GeneralSettingsDialog(const GeneralSettingsDialog& newObject);
+        GeneralSettingsDialog(Bootstrap::PersistenceContainer& container);
 
         static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -49,23 +41,12 @@ namespace UKControllerPlugin::Euroscope {
             {"beta", L"Beta"},
         };
 
-        // Maps setting key to display name for the colour palette combo box
-        const std::map<std::string, std::wstring, std::less<>> colourPaletteMap{
-            {"default", L"Default"},
-            {"node", L"NODE"},
-            {"nerc", L"NERC"},
-            {"nova", L"NOVA"},
-            {"itec", L"iTEC"},
-        };
-
         const std::string DEFAULT_RELEASE_CHANNEL = "stable";
-
-        const std::string DEFAULT_COLOUR_PALETTE = "default";
 
         // A place where user settings are retrieved and stored
         UKControllerPlugin::Euroscope::UserSetting& userSettings;
 
-        UKControllerPlugin::Windows::GdiplusBrushes& brushes;
+        Theme::ThemeSettings &themeSettings;
 
         // A set of handlers that want to know when user settings get updated
         const UKControllerPlugin::Euroscope::UserSettingAwareCollection& userSettingsHandlers;

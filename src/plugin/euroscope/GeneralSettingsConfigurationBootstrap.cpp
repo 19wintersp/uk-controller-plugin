@@ -30,18 +30,12 @@ using UKControllerPluginUtils::Update::BootstrapReleaseChannelSettings;
 namespace UKControllerPlugin {
     namespace Euroscope {
 
-        void GeneralSettingsConfigurationBootstrap::BootstrapPlugin(
-            DialogManager& dialogManager,
-            UserSetting& userSettings,
-            UserSettingAwareCollection& userSettingsHandlers,
-            Setting::SettingRepository& settings,
-            WinApiInterface& windows,
-            Windows::GdiplusBrushes& brushes)
+        void GeneralSettingsConfigurationBootstrap::BootstrapPlugin(Bootstrap::PersistenceContainer& container)
         {
-            BootstrapReleaseChannelSettings(settings, windows);
+            BootstrapReleaseChannelSettings(*container.settingsRepository, *container.windows);
             std::shared_ptr<GeneralSettingsDialog> dialog =
-                std::make_shared<GeneralSettingsDialog>(userSettings, userSettingsHandlers, settings, brushes);
-            dialogManager.AddDialog(
+                std::make_shared<GeneralSettingsDialog>(container);
+            container.dialogManager.AddDialog(
                 {IDD_GENERAL_SETTINGS,
                  "General Settings",
                  reinterpret_cast<DLGPROC>(dialog->WndProc),

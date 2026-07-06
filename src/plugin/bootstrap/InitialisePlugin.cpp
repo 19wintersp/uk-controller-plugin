@@ -28,8 +28,6 @@
 #include "flightinformationservice/FlightInformationServiceModule.h"
 #include "flightplan/FlightplanStorageBootstrap.h"
 #include "flightrule/FlightRuleModule.h"
-#include "graphics/GdiplusBrushes.h"
-#include "graphics/Theme.h"
 #include "handoff/HandoffModule.h"
 #include "historytrail/HistoryTrailModule.h"
 #include "hold/HoldModule.h"
@@ -66,6 +64,7 @@
 #include "stands/StandModule.h"
 #include "task/RunAsyncTask.h"
 #include "task/TaskRunnerInterface.h"
+#include "theme/ThemeModule.h"
 #include "update/PluginVersion.h"
 #include "wake/WakeModule.h"
 
@@ -244,21 +243,10 @@ namespace UKControllerPlugin {
         LoginModule::BootstrapPlugin(*this->container);
         SectorFile::BootstrapPlugin(*this->container);
 
-        // Apply the saved colour palette theme
-        {
-            auto& userSettings = *this->container->pluginUserSettingHandler;
-            std::string palette = userSettings.GetStringEntry("colourPalette", "default");
-            this->container->brushes->LoadTheme(ThemeFromKey(palette));
-        }
+        ThemeModule::BootstrapPlugin(*this->container);
 
         // General settings config bootstrap
-        GeneralSettingsConfigurationBootstrap::BootstrapPlugin(
-            *this->container->dialogManager,
-            *this->container->pluginUserSettingHandler,
-            *this->container->userSettingHandlers,
-            *this->container->settingsRepository,
-            *this->container->windows,
-            *this->container->brushes);
+        GeneralSettingsConfigurationBootstrap::BootstrapPlugin(*this->container);
 
         // Bootstrap the modules
         Metar::BootstrapPlugin(*this->container);

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace UKControllerPlugin {
+/* namespace UKControllerPlugin {
     namespace Plugin {
         class FunctionCallEventHandler;
     } // namespace Plugin
@@ -24,7 +24,7 @@ namespace UKControllerPlugin {
         class WinApiInterface;
         struct GdiplusBrushes;
     } // namespace Windows
-} // namespace UKControllerPlugin
+} // namespace UKControllerPlugin */
 
 namespace UKControllerPlugin {
     namespace Euroscope {
@@ -35,13 +35,7 @@ namespace UKControllerPlugin {
         class GeneralSettingsConfigurationBootstrap
         {
             public:
-            static void BootstrapPlugin(
-                UKControllerPlugin::Dialog::DialogManager& dialogManager,
-                UKControllerPlugin::Euroscope::UserSetting& userSettings,
-                UKControllerPlugin::Euroscope::UserSettingAwareCollection& userSettingsHandlers,
-                Setting::SettingRepository& settings,
-                Windows::WinApiInterface& windows,
-                Windows::GdiplusBrushes& brushes);
+            static void BootstrapPlugin(Bootstrap::PersistenceContainer& container);
 
             static void BootstrapRadarScreen(
                 UKControllerPlugin::Plugin::FunctionCallEventHandler& functionCalls,

@@ -34,14 +34,16 @@ using std::min;
 #include <winsock2.h>
 #include <Windows.h>
 #include <CommCtrl.h>
-#include <CommDlg.h>
+#include <commdlg.h>
 #include <KnownFolders.h>
-#include <Shlobj.h>
-#include <Shobjidl.h>
+#include <shlobj.h>
+#include <shobjidl.h>
 #include <algorithm>
 #include <any>
 #include <cctype>
 #include <codecvt>
+//#include <cstddef> // ?
+//#include <cstdint> // ?
 #include <ctime>
 #include <filesystem>
 #include <fstream>
@@ -64,6 +66,7 @@ using std::min;
 #include <sstream>
 #include <string>
 #include <tchar.h>
+//#include <tuple> // ?
 #include <type_traits>
 #include <typeindex>
 #include <unordered_map>
