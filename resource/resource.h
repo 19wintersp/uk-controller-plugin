@@ -37,7 +37,6 @@
 #define IDC_TRAIL_TYPE                  1004
 #define IDC_TRAIL_LENGTH                1005
 #define IDC_TRAIL_COLOUR                1009
-#define IDC_COLOUR_PALETTE              1146
 #define IDC_SPIN_LENGTH                 1010
 #define IDC_DOT_SIZE                    1012
 #define GS_DIALOG_PRENOTE_TITLE         1012
