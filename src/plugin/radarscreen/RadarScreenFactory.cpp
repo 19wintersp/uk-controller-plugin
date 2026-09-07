@@ -68,7 +68,6 @@ namespace UKControllerPlugin::RadarScreen {
         GeneralSettingsConfigurationBootstrap::BootstrapRadarScreen(
             *persistence.pluginFunctionHandlers,
             configurableDisplays,
-            *persistence.brushes,
             commandHandlers,
             *persistence.dialogManager);
 
@@ -87,7 +86,6 @@ namespace UKControllerPlugin::RadarScreen {
             *persistence.minStack,
             renderers,
             configurableDisplays,
-            *persistence.brushes,
             userSettingHandlers,
             *persistence.dialogManager);
 
@@ -96,7 +94,6 @@ namespace UKControllerPlugin::RadarScreen {
             *persistence.regionalPressureManager,
             renderers,
             configurableDisplays,
-            *persistence.brushes,
             userSettingHandlers,
             *persistence.dialogManager);
 
@@ -106,7 +103,6 @@ namespace UKControllerPlugin::RadarScreen {
             persistence.timerConfigurationManager,
             renderers,
             configurableDisplays,
-            *persistence.brushes,
             userSettingHandlers);
 
         Hold::BootstrapRadarScreen(
@@ -114,7 +110,6 @@ namespace UKControllerPlugin::RadarScreen {
             renderers,
             userSettingHandlers,
             commandHandlers,
-            *persistence.brushes,
             this->persistence);
 
         Srd::BootstrapRadarScreen(configurableDisplays);
@@ -124,7 +119,7 @@ namespace UKControllerPlugin::RadarScreen {
         Departure::BootstrapRadarScreen(this->persistence, renderers, configurableDisplays, userSettingHandlers);
         MissedApproach::BootstrapRadarScreen(this->persistence, renderers, configurableDisplays, userSettingHandlers);
         Wake::BootstrapRadarScreen(
-            this->persistence, renderers, userSettingHandlers, displayFactory, *persistence.brushes);
+            this->persistence, renderers, userSettingHandlers, displayFactory);
 
         this->persistence.bootstrapProviders->BootstrapRadarScreen(
             this->persistence, renderers, configurableDisplays, userSettingHandlers, displayFactory);
@@ -136,7 +131,7 @@ namespace UKControllerPlugin::RadarScreen {
         UKControllerPlugin::Plugin::BootstrapPluginInformationMessage(this->persistence, configurableDisplays);
 
         // Last thing we do is ScreenControls
-        ScreenControlsBootstrap::BootstrapRadarScreen(configurableDisplays, renderers, *persistence.brushes);
+        ScreenControlsBootstrap::BootstrapRadarScreen(configurableDisplays, renderers);
         return new UKRadarScreen(
             userSettingHandlers,
             renderers,

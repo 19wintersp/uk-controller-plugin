@@ -25,7 +25,6 @@ namespace UKControllerPlugin {
     } // namespace Releases
     namespace Windows {
         class GdiGraphicsInterface;
-        struct GdiplusBrushes;
     } // namespace Windows
 } // namespace UKControllerPlugin
 
@@ -45,7 +44,6 @@ namespace UKControllerPlugin::Departure {
             Euroscope::EuroscopePluginLoopbackInterface& plugin,
             const Controller::ControllerPositionCollection& controllers,
             const Controller::ActiveCallsignCollection& activeCallsigns,
-            const UKControllerPlugin::Windows::GdiplusBrushes& brushes,
             int screenObjectId);
         void LeftClick(
             Euroscope::EuroscopeRadarLoopbackInterface& radarScreen,
@@ -76,9 +74,6 @@ namespace UKControllerPlugin::Departure {
 
         // Contains all the prenote messages
         Prenote::PrenoteMessageCollection& prenotes;
-
-        // Pens and brushes
-        const UKControllerPlugin::Windows::GdiplusBrushes& brushes;
 
         // Provides interface with the plugin
         Euroscope::EuroscopePluginLoopbackInterface& plugin;

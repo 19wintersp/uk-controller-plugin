@@ -2,21 +2,21 @@
 
 namespace UKControllerPlugin::Theme {
 
-    auto GetEntry(PaletteKey key) const -> PaletteEntry
+    auto Palette::GetEntry(PaletteKey key) const -> PaletteEntry
     {
         return entries[static_cast<std::size_t>(key)];
     }
 
-    auto GetId() const -> const char * {
+    auto Palette::GetId() const -> const char * {
         return id;
     }
 
-    auto GetName() const -> const char * {
+    auto Palette::GetName() const -> const wchar_t * {
         return name;
     }
 
     constexpr Palette::Palette(
-        const char* id_, const char* name_, std::initializer_list<std::pair<PaletteKey, PaletteEntry>> entries_)
+        const char* id_, const wchar_t* name_, std::initializer_list<std::pair<PaletteKey, PaletteEntry>> entries_)
         : id(id_), name(name_)
     {
         for (const auto [key, entry] : entries_)
@@ -24,8 +24,8 @@ namespace UKControllerPlugin::Theme {
     }
 
     constexpr Palette::Palette(
-        const char* id,
-        const char* name,
+        const char* id_,
+        const wchar_t* name_,
         const Palette& base,
         std::initializer_list<std::pair<PaletteKey, PaletteEntry>> overrides)
         : id(id_), name(name_)
@@ -40,7 +40,7 @@ namespace UKControllerPlugin::Theme {
     constexpr static const Palette
         BASE_PALETTE(
             Palette::DEFAULT,
-            "Classic",
+            L"Classic",
             {{PaletteKey::Background,            "#3a393a"},
              {PaletteKey::Border,                "#d7d7d7"},
              {PaletteKey::Header,                "#82329a"},
@@ -54,7 +54,7 @@ namespace UKControllerPlugin::Theme {
              {PaletteKey::TimerRed,              "#ff0000"}}),
         NODE_PALETTE(
             "node",
-            "NODE",
+            L"NODE",
             {{PaletteKey::Background,            "#000000"},
              {PaletteKey::Border,                "#ffffff"},
              {PaletteKey::Header,                "#a06f70"},
@@ -68,7 +68,7 @@ namespace UKControllerPlugin::Theme {
              {PaletteKey::TimerRed,              "#ff6432"}}),
         NERC_PALETTE(
             "nerc",
-            "NERC",
+            L"NERC",
             {{PaletteKey::Background,            "#969696"},
              {PaletteKey::Border,                "#535353"},
              {PaletteKey::Header,                "#878787"},
@@ -82,14 +82,14 @@ namespace UKControllerPlugin::Theme {
              {PaletteKey::TimerRed,              "#c00000"}}),
         NOVA_PALETTE(
             "nova",
-            "NOVA",
+            L"NOVA",
             NERC_PALETTE,
             {{PaletteKey::Background,            "#b4b4b4"},
              {PaletteKey::Header,                "#008cc8"},
              {PaletteKey::TimerGreen,            "#ffffff"}}),
         ITEC_PALETTE(
             "itec",
-            "iTEC",
+            L"iTEC",
             NERC_PALETTE,
             {{PaletteKey::Background,            "#c3c3b9"},
              {PaletteKey::Border,                "#000000"},
@@ -99,21 +99,21 @@ namespace UKControllerPlugin::Theme {
              {PaletteKey::TimerGreen,            "#0000ff"}});
     // clang-format on
 
-    const std::vector<const Palette&> Palette::PALETTES = {
-        BASE_PALETTE, NODE_PALETTE, NERC_PALETTE, NOVA_PALETTE, ITEC_PALETTE};
+    const std::vector<const Palette*> Palette::PALETTES = {
+        &BASE_PALETTE, &NODE_PALETTE, &NERC_PALETTE, &NOVA_PALETTE, &ITEC_PALETTE};
 
-    static auto GetPalettes() const -> const std::vector<const Palette&>&
+    auto Palette::GetPalettes() -> const std::vector<const Palette*>&
     {
         return PALETTES;
     }
 
-    static auto GetPalette(const char* id) const -> const Palette&
+    auto Palette::GetPalette(const char* id) -> const Palette*
     {
-        for (const Palette& palette : PALETTES)
-            if (!std::strcmp(palette.id, id))
+        for (const Palette* palette : PALETTES)
+            if (!std::strcmp(palette->id, id))
                 return palette;
 
-        return BASE_PALETTE;
+        return &BASE_PALETTE;
     }
 
 } // namespace UKControllerPlugin::Theme

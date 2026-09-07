@@ -21,14 +21,11 @@
 #include "euroscope/AsrEventHandlerCollection.h"
 #include "euroscope/PluginSettingsProviderCollection.h"
 #include "flightplan/FlightPlanEventHandlerCollection.h"
-#include "graphics/GdiplusBrushes.h"
 #include "list/PopupListFactory.h"
 #include "radarscreen/MenuToggleableDisplayFactory.h"
 #include "radarscreen/RadarRenderableCollection.h"
 #include "tag/TagItemCollection.h"
 #include "timedevent/TimedEventCollection.h"
-
-using UKControllerPlugin::Windows::GdiplusBrushes;
 
 namespace UKControllerPlugin::Approach {
 
@@ -95,7 +92,6 @@ namespace UKControllerPlugin::Approach {
                         container.moduleFactories->Approach().SequencerOptions(), displayOptions),
                     "Toggle sequencer airfield separation selector"),
                 *container.plugin,
-                *container.brushes,
                 sequencerScreenObjectId),
             RadarScreen::RadarRenderableCollection::beforeTags);
 

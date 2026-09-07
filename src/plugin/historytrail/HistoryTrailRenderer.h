@@ -17,7 +17,6 @@ namespace UKControllerPlugin {
 
     namespace Windows {
         class GdiGraphicsInterface;
-        struct GdiplusBrushes;
     } // namespace Windows
     namespace Dialog {
         class DialogManager;

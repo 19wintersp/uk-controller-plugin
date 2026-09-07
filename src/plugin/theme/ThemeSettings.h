@@ -1,5 +1,9 @@
 #pragma once
 
+namespace UKControllerPlugin::Euroscope {
+    class UserSetting;
+} // namespace UKControllerPlugin::Euroscope
+
 namespace UKControllerPlugin::Theme {
 
     /*
@@ -20,8 +24,6 @@ namespace UKControllerPlugin::Theme {
 
         private:
         Euroscope::UserSetting& userSettings;
-
-        static const std::string KEY_PALETTE = "colourPalette";
     };
 
 } // namespace UKControllerPlugin::Theme

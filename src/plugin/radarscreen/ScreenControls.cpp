@@ -2,19 +2,20 @@
 #include "ConfigurableDisplayInterface.h"
 #include "euroscope/EuroscopeRadarLoopbackInterface.h"
 #include "graphics/GdiGraphicsInterface.h"
-#include "graphics/GdiplusBrushes.h"
+#include "theme/ThemeManager.h"
 
 using Gdiplus::Graphics;
 using UKControllerPlugin::Euroscope::EuroscopeRadarLoopbackInterface;
 using UKControllerPlugin::RadarScreen::ConfigurableDisplayCollection;
 using UKControllerPlugin::RadarScreen::ConfigurableDisplayInterface;
-using UKControllerPlugin::Windows::GdiplusBrushes;
+using UKControllerPlugin::Theme::PaletteKey;
+using UKControllerPlugin::Theme::ThemeManager;
 
 namespace UKControllerPlugin::RadarScreen {
 
     ScreenControls::ScreenControls(
-        int toggleboxIdEuroscope, ConfigurableDisplayCollection configurableDisplays, const GdiplusBrushes& brushes)
-        : brushes(brushes), configurableDisplays(std::move(configurableDisplays)),
+        int toggleboxIdEuroscope, ConfigurableDisplayCollection configurableDisplays)
+        : configurableDisplays(std::move(configurableDisplays)),
           toggleboxIdEuroscope(toggleboxIdEuroscope)
     {
     }
@@ -80,8 +81,8 @@ namespace UKControllerPlugin::RadarScreen {
         RECT radarArea = radarScreen.GetRadarViewport();
         Gdiplus::Rect renderArea = {
             radarArea.right - controlWidth, radarArea.bottom - controlHeight, controlWidth, controlHeight};
-        graphics.FillRect(renderArea, Gdiplus::SolidBrush(this->brushes.euroscopeBackground));
-        graphics.DrawString(L"OP", renderArea, Gdiplus::SolidBrush(this->brushes.green));
+        graphics.FillRect(renderArea, ThemeManager::Brush(PaletteKey::Background));
+        graphics.DrawString(L"OP", renderArea, ThemeManager::Brush(PaletteKey::Text));
         radarScreen.RegisterScreenObject(
             toggleboxIdEuroscope,
             "",

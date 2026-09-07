@@ -85,7 +85,6 @@ using UKControllerPlugin::Duplicate::DuplicatePlugin;
 using UKControllerPlugin::Euroscope::GeneralSettingsConfigurationBootstrap;
 using UKControllerPlugin::Euroscope::PluginUserSettingBootstrap;
 using UKControllerPlugin::Flightplan::FlightplanStorageBootstrap;
-using UKControllerPlugin::Graphics::ThemeFromKey;
 using UKControllerPlugin::HistoryTrail::HistoryTrailModule;
 using UKControllerPlugin::InitialAltitude::InitialAltitudeModule;
 using UKControllerPlugin::Log::LoggerBootstrap;
@@ -96,6 +95,7 @@ using UKControllerPlugin::Plugin::PluginVersion;
 using UKControllerPlugin::Prenote::PrenoteModule;
 using UKControllerPlugin::Regional::RegionalPressureModule;
 using UKControllerPlugin::Squawk::SquawkModule;
+using UKControllerPlugin::Theme::ThemeModule;
 
 namespace UKControllerPlugin {
     /*

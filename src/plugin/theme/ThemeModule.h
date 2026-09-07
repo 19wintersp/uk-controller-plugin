@@ -1,5 +1,9 @@
 #pragma once
 
+namespace UKControllerPlugin::Bootstrap {
+    struct PersistenceContainer;
+} // namespace UKControllerPlugin::Bootstrap
+
 namespace UKControllerPlugin::Theme {
 
     /*

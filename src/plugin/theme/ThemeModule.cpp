@@ -1,8 +1,13 @@
 #include "ThemeModule.h"
+#include "ThemeManager.h"
+#include "ThemeSettings.h"
+#include "ThemeUserSettingHandler.h"
+#include "bootstrap/PersistenceContainer.h"
+#include "euroscope/UserSettingAwareCollection.h"
 
 namespace UKControllerPlugin::Theme {
 
-    void ThemeModule::BootstrapPlugin(UKControllerPlugin::Bootstrap::PersistenceContainer& container)
+    void ThemeModule::BootstrapPlugin(Bootstrap::PersistenceContainer& container)
     {
         ThemeManager::Instance();
 

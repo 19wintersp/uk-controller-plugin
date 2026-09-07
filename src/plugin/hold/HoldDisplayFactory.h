@@ -13,9 +13,6 @@ namespace UKControllerPlugin {
     namespace Navaids {
         class NavaidCollection;
     } // namespace Navaids
-    namespace Windows {
-        struct GdiplusBrushes;
-    } // namespace Windows
 } // namespace UKControllerPlugin
 
 namespace UKControllerPlugin {
@@ -36,8 +33,7 @@ namespace UKControllerPlugin {
                 const UKControllerPlugin::Navaids::NavaidCollection& navaids,
                 const UKControllerPlugin::Hold::PublishedHoldCollection& holds,
                 const UKControllerPlugin::Dialog::DialogManager& dialogManager,
-                const Aircraft::CallsignSelectionListFactory& addAircraftListFactory,
-                const UKControllerPlugin::Windows::GdiplusBrushes& brushes);
+                const Aircraft::CallsignSelectionListFactory& addAircraftListFactory);
             [[nodiscard]] auto
             Create(std::string navaid) const -> std::unique_ptr<UKControllerPlugin::Hold::HoldDisplay>;
 
@@ -59,9 +55,6 @@ namespace UKControllerPlugin {
 
             // For creating the callsign selection lists
             const Aircraft::CallsignSelectionListFactory& addAircraftListFactory;
-
-            // Brushes
-            const UKControllerPlugin::Windows::GdiplusBrushes& brushes;
         };
     } // namespace Hold
 } // namespace UKControllerPlugin

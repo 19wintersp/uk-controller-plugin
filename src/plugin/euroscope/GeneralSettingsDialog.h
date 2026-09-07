@@ -1,21 +1,20 @@
 #pragma once
 
-/* namespace UKControllerPlugin {
+namespace UKControllerPlugin {
+    namespace Bootstrap {
+        struct PersistenceContainer;
+    } // namespace Bootstrap
     namespace Euroscope {
         class UserSetting;
         class UserSettingAwareCollection;
     } // namespace Euroscope
-    namespace Graphics {
-        struct Theme;
-        auto ThemeFromKey(const std::string& key) -> const Theme&;
-    } // namespace Graphics
     namespace Setting {
         class SettingRepository;
     } // namespace Setting
-    namespace Windows {
-        struct GdiplusBrushes;
-    } // namespace Windows
-} // namespace UKControllerPlugin */
+    namespace Theme {
+        class ThemeSettings;
+    } // namespace Theme
+} // namespace UKControllerPlugin
 
 namespace UKControllerPlugin::Euroscope {
 

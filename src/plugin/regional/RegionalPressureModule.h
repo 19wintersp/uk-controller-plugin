@@ -21,9 +21,6 @@ namespace UKControllerPlugin {
     namespace Regional {
         class RegionalPressureManager;
     } // namespace Regional
-    namespace Windows {
-        struct GdiplusBrushes;
-    } // namespace Windows
     namespace Curl {
         class CurlInterface;
     } // namespace Curl
@@ -54,7 +51,6 @@ namespace UKControllerPlugin {
                 UKControllerPlugin::Regional::RegionalPressureManager& regionalPressureManager,
                 UKControllerPlugin::RadarScreen::RadarRenderableCollection& radarRender,
                 UKControllerPlugin::RadarScreen::ConfigurableDisplayCollection& configurableDisplays,
-                const UKControllerPlugin::Windows::GdiplusBrushes& brushes,
                 UKControllerPlugin::Euroscope::AsrEventHandlerCollection& userSettingHandlers,
                 const UKControllerPlugin::Dialog::DialogManager& dialogManager);
         };

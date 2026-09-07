@@ -4,7 +4,6 @@
 #include "regional/RegionalPressureManager.h"
 #include "radarscreen/RadarRenderableCollection.h"
 #include "radarscreen/ConfigurableDisplayCollection.h"
-#include "graphics/GdiplusBrushes.h"
 #include "euroscope/AsrEventHandlerCollection.h"
 #include "task/TaskRunnerInterface.h"
 #include "euroscope/CallbackFunction.h"
@@ -23,7 +22,6 @@ using UKControllerPlugin::Push::PushEventProcessorCollection;
 using UKControllerPlugin::RadarScreen::ConfigurableDisplayCollection;
 using UKControllerPlugin::RadarScreen::RadarRenderableCollection;
 using UKControllerPlugin::TaskManager::TaskRunnerInterface;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 
 namespace UKControllerPlugin {
     namespace Regional {
@@ -73,7 +71,6 @@ namespace UKControllerPlugin {
             RegionalPressureManager& regionalPressureManager,
             RadarRenderableCollection& radarRender,
             ConfigurableDisplayCollection& configurableDisplays,
-            const GdiplusBrushes& brushes,
             AsrEventHandlerCollection& userSettingHandlers,
             const DialogManager& dialogManager)
         {
@@ -86,7 +83,6 @@ namespace UKControllerPlugin {
                 radarRender.ReserveScreenObjectIdentifier(rendererId),
                 radarRender.ReserveScreenObjectIdentifier(rendererId),
                 configureFunctionId,
-                brushes,
                 dialogManager));
 
             // Add to the handlers.

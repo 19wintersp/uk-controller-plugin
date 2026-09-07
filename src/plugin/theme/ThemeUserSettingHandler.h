@@ -4,6 +4,8 @@
 
 namespace UKControllerPlugin::Theme {
 
+    class ThemeSettings;
+
     /*
         Bootstraps the theming module.
     */
@@ -12,6 +14,7 @@ namespace UKControllerPlugin::Theme {
         public:
         ThemeUserSettingHandler(std::shared_ptr<ThemeSettings> settings);
         void UserSettingsUpdated(Euroscope::UserSetting& userSettings) override;
+        void UserSettingsUpdated();
 
         private:
         std::shared_ptr<ThemeSettings> settings;

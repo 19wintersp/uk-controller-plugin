@@ -12,9 +12,6 @@ namespace UKControllerPlugin {
     namespace List {
         class PopupListInterface;
     } // namespace List
-    namespace Windows {
-        struct GdiplusBrushes;
-    } // namespace Windows
 } // namespace UKControllerPlugin
 
 namespace UKControllerPlugin::Approach {
@@ -40,7 +37,6 @@ namespace UKControllerPlugin::Approach {
             std::shared_ptr<List::PopupListInterface> airfieldTargetSelector,
             std::shared_ptr<List::PopupListInterface> airfieldSeparationSelector,
             Euroscope::EuroscopePluginLoopbackInterface& plugin,
-            const UKControllerPlugin::Windows::GdiplusBrushes& brushes,
             int screenObjectId);
         [[nodiscard]] auto IsVisible() const -> bool override;
         void LeftClick(
@@ -109,9 +105,6 @@ namespace UKControllerPlugin::Approach {
 
         // The plugin
         Euroscope::EuroscopePluginLoopbackInterface& plugin;
-
-        // Pens and brushes
-        const UKControllerPlugin::Windows::GdiplusBrushes& brushes;
 
         // The screen object id
         int screenObjectId;

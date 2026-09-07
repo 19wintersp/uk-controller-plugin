@@ -25,7 +25,6 @@
 #include "dialog/DialogManager.h"
 #include "euroscope/AsrEventHandlerCollection.h"
 #include "euroscope/CallbackFunction.h"
-#include "graphics/GdiplusBrushes.h"
 #include "message/UserMessager.h"
 #include "plugin/FunctionCallEventHandler.h"
 #include "plugin/UKPlugin.h"
@@ -57,7 +56,6 @@ using UKControllerPlugin::Plugin::FunctionCallEventHandler;
 using UKControllerPlugin::RadarScreen::ConfigurableDisplayCollection;
 using UKControllerPlugin::RadarScreen::RadarRenderableCollection;
 using UKControllerPlugin::Tag::TagFunction;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 using UKControllerPlugin::Windows::WinApiInterface;
 
 namespace UKControllerPlugin::Hold {
@@ -140,8 +138,7 @@ namespace UKControllerPlugin::Hold {
             *container.navaids,
             *container.publishedHolds,
             *container.dialogManager,
-            *container.callsignSelectionListFactory,
-            *container.brushes);
+            *container.callsignSelectionListFactory);
 
         // Command to assign holds
         container.commandHandlers->RegisterHandler(
@@ -193,7 +190,6 @@ namespace UKControllerPlugin::Hold {
         RadarRenderableCollection& radarRenderables,
         AsrEventHandlerCollection& asrEvents,
         CommandHandlerCollection& commandHandlers,
-        const GdiplusBrushes& brushes,
         const PersistenceContainer& container)
     {
         // Display manager

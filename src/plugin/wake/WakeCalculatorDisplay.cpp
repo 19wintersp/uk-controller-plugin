@@ -12,10 +12,13 @@
 #include "euroscope/UserSetting.h"
 #include "graphics/FontManager.h"
 #include "graphics/GdiGraphicsInterface.h"
-#include "graphics/GdiplusBrushes.h"
 #include "graphics/StringFormatManager.h"
 #include "helper/HelperFunctions.h"
 #include "list/PopupListInterface.h"
+#include "theme/ThemeManager.h"
+
+using UKControllerPlugin::Theme::PaletteKey;
+using UKControllerPlugin::Theme::ThemeManager;
 
 namespace UKControllerPlugin::Wake {
 
@@ -25,7 +28,6 @@ namespace UKControllerPlugin::Wake {
         std::shared_ptr<List::PopupListInterface> followCallsignSelector,
         std::shared_ptr<List::PopupListInterface> wakeSchemeSelector,
         Euroscope::EuroscopePluginLoopbackInterface& plugin,
-        const Windows::GdiplusBrushes& brushes,
         int screenObjectId)
         : options(std::move(options)), leadCallsignSelector(std::move(leadCallsignSelector)),
           followCallsignSelector(std::move(followCallsignSelector)), wakeSchemeSelector(std::move(wakeSchemeSelector)),
@@ -33,9 +35,7 @@ namespace UKControllerPlugin::Wake {
                               L"Wake Turbulence Calculator",
                               TitleBarArea(),
                               [this]() -> bool { return this->contentCollapsed; },
-                              screenObjectId,
-                              brushes)),
-          brushes(brushes),
+                              screenObjectId)),
           leadClickspot(Components::ClickableArea::Create(leadTextArea, screenObjectId, "leadcallsign", false)),
           followingClickspot(
               Components::ClickableArea::Create(followingTextArea, screenObjectId, "followcallsign", false)),
@@ -150,7 +150,7 @@ namespace UKControllerPlugin::Wake {
         graphics.Translated(windowPosition.x, windowPosition.y, [&graphics, &radarScreen, this]() {
             // Draw the content if not collapsed
             if (!this->contentCollapsed) {
-                graphics.FillRect(this->contentArea, *this->brushes.backgroundBrush);
+                graphics.FillRect(this->contentArea, ThemeManager::Brush(PaletteKey::Background));
                 this->RenderScheme(graphics, radarScreen);
                 this->RenderIntermediate(graphics, radarScreen);
                 this->RenderMode(graphics, radarScreen);
@@ -161,7 +161,7 @@ namespace UKControllerPlugin::Wake {
             }
 
             // Do title bar, so it's always on top.
-            titleBar->DrawTheme(graphics, radarScreen, this->brushes);
+            titleBar->Draw(graphics, radarScreen);
         });
     }
 
@@ -206,13 +206,13 @@ namespace UKControllerPlugin::Wake {
         graphics.DrawString(
             L"Scheme:",
             schemeStaticArea,
-            *this->brushes.textBrush,
+            ThemeManager::Brush(PaletteKey::Text),
             Graphics::StringFormatManager::Instance().GetLeftAlign(),
             Graphics::FontManager::Instance().GetDefault());
         graphics.DrawString(
             HelperFunctions::ConvertToWideString(options->Scheme()),
             schemeTextArea,
-            *this->brushes.textBrush,
+            ThemeManager::Brush(PaletteKey::Text),
             Graphics::StringFormatManager::Instance().GetLeftAlign(),
             Graphics::FontManager::Instance().GetDefault());
         this->schemeClickspot->Apply(graphics, radarScreen);
@@ -224,13 +224,13 @@ namespace UKControllerPlugin::Wake {
         graphics.DrawString(
             L"Mode:",
             departureArrivalStaticArea,
-            *this->brushes.textBrush,
+            ThemeManager::Brush(PaletteKey::Text),
             Graphics::StringFormatManager::Instance().GetLeftAlign(),
             Graphics::FontManager::Instance().GetDefault());
         graphics.DrawString(
             options->Arrivals() ? L"Arrival" : L"Departure",
             departureArrivaTextArea,
-            *this->brushes.textBrush,
+            ThemeManager::Brush(PaletteKey::Text),
             Graphics::StringFormatManager::Instance().GetLeftAlign(),
             Graphics::FontManager::Instance().GetDefault());
         this->departureArrivalClickspot->Apply(graphics, radarScreen);
@@ -243,13 +243,13 @@ namespace UKControllerPlugin::Wake {
         graphics.DrawString(
             L"Lead:",
             leadStaticArea,
-            *this->brushes.textBrush,
+            ThemeManager::Brush(PaletteKey::Text),
             Graphics::StringFormatManager::Instance().GetLeftAlign(),
             Graphics::FontManager::Instance().GetDefault());
         graphics.DrawString(
             HelperFunctions::ConvertToWideString(lead.empty() ? "--" : lead),
             leadTextArea,
-            *this->brushes.textBrush,
+            ThemeManager::Brush(PaletteKey::Text),
             Graphics::StringFormatManager::Instance().GetLeftAlign(),
             Graphics::FontManager::Instance().GetDefault());
         this->leadClickspot->Apply(graphics, radarScreen);
@@ -262,13 +262,13 @@ namespace UKControllerPlugin::Wake {
         graphics.DrawString(
             L"Follow:",
             followingStaticArea,
-            *this->brushes.textBrush,
+            ThemeManager::Brush(PaletteKey::Text),
             Graphics::StringFormatManager::Instance().GetLeftAlign(),
             Graphics::FontManager::Instance().GetDefault());
         graphics.DrawString(
             HelperFunctions::ConvertToWideString(following.empty() ? "--" : following),
             followingTextArea,
-            *this->brushes.textBrush,
+            ThemeManager::Brush(PaletteKey::Text),
             Graphics::StringFormatManager::Instance().GetLeftAlign(),
             Graphics::FontManager::Instance().GetDefault());
         this->followingClickspot->Apply(graphics, radarScreen);
@@ -280,13 +280,13 @@ namespace UKControllerPlugin::Wake {
         graphics.DrawString(
             L"Intermediate:",
             intermediateStaticArea,
-            *this->brushes.textBrush,
+            ThemeManager::Brush(PaletteKey::Text),
             Graphics::StringFormatManager::Instance().GetLeftAlign(),
             Graphics::FontManager::Instance().GetDefault());
         graphics.DrawString(
             options->Intermediate() ? L"Yes" : L"No",
             intermediateTextArea,
-            *this->brushes.textBrush,
+            ThemeManager::Brush(PaletteKey::Text),
             Graphics::StringFormatManager::Instance().GetLeftAlign(),
             Graphics::FontManager::Instance().GetDefault());
         this->intermediateClickspot->Apply(graphics, radarScreen);
@@ -294,7 +294,7 @@ namespace UKControllerPlugin::Wake {
 
     void WakeCalculatorDisplay::RenderDividingLine(Windows::GdiGraphicsInterface& graphics)
     {
-        graphics.DrawLine(*this->brushes.borderPen, dividingLineStart, dividingLineEnd);
+        graphics.DrawLine(ThemeManager::Pen(PaletteKey::Border), dividingLineStart, dividingLineEnd);
     }
 
     void WakeCalculatorDisplay::RenderSeparationRequirement(Windows::GdiGraphicsInterface& graphics)
@@ -307,7 +307,7 @@ namespace UKControllerPlugin::Wake {
             graphics.DrawString(
                 L"--",
                 calculationResultArea,
-                *this->brushes.mainAircraftTextBrush,
+                ThemeManager::Brush(PaletteKey::AircraftTextHighlight),
                 Graphics::StringFormatManager::Instance().GetCentreAlign(),
                 Graphics::FontManager::Instance().Get(16));
             return;
@@ -320,7 +320,7 @@ namespace UKControllerPlugin::Wake {
             graphics.DrawString(
                 L"--",
                 calculationResultArea,
-                *this->brushes.mainAircraftTextBrush,
+                ThemeManager::Brush(PaletteKey::AircraftTextHighlight),
                 Graphics::StringFormatManager::Instance().GetCentreAlign(),
                 Graphics::FontManager::Instance().Get(16));
             return;
@@ -332,7 +332,7 @@ namespace UKControllerPlugin::Wake {
                                                 HelperFunctions::ConvertToWideString(followingCategory->Code()) +
                                                 (options->Intermediate() ? L" (intermediate)" : L"");
 
-        graphics.DrawString(categoryComparison, comparisonTextArea, *this->brushes.textBrush);
+        graphics.DrawString(categoryComparison, comparisonTextArea, ThemeManager::Brush(PaletteKey::Text));
 
         // Check for intervals and display if present
         const auto interval = RelevantInterval(*leadCategory, *followingCategory, options->Intermediate());
@@ -340,7 +340,7 @@ namespace UKControllerPlugin::Wake {
             graphics.DrawString(
                 L"N/A",
                 calculationResultArea,
-                *this->brushes.mainAircraftTextBrush,
+                ThemeManager::Brush(PaletteKey::AircraftTextHighlight),
                 Graphics::StringFormatManager::Instance().GetCentreAlign(),
                 Graphics::FontManager::Instance().Get(16));
             return;
@@ -349,7 +349,7 @@ namespace UKControllerPlugin::Wake {
         graphics.DrawString(
             FormatInterval(*interval),
             calculationResultArea,
-            *this->brushes.mainAircraftTextBrush,
+            ThemeManager::Brush(PaletteKey::AircraftTextHighlight),
             Graphics::StringFormatManager::Instance().GetCentreAlign(),
             Graphics::FontManager::Instance().Get(16));
     }

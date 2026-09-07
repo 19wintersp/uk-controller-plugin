@@ -21,7 +21,6 @@ namespace UKControllerPlugin {
     } // namespace Navaids
     namespace Windows {
         class GdiGraphicsInterface;
-        struct GdiplusBrushes;
     } // namespace Windows
 } // namespace UKControllerPlugin
 
@@ -43,7 +42,6 @@ namespace UKControllerPlugin {
                 const Navaids::Navaid& navaid,
                 const PublishedHoldCollection& publishedHoldCollection,
                 const Dialog::DialogManager& dialogManager,
-                const UKControllerPlugin::Windows::GdiplusBrushes& brushes,
                 std::shared_ptr<List::PopupListInterface> addAircraftSelector);
             void ButtonClicked(std::string button);
             void ButtonRightClicked(const std::string& button);
@@ -175,8 +173,6 @@ namespace UKControllerPlugin {
             // Brushes
             Gdiplus::Pen verticalSpeedAscentPen;
             Gdiplus::Pen verticalSpeedDescentPen;
-
-            const UKControllerPlugin::Windows::GdiplusBrushes& brushes;
 
             // Fonts
             const Gdiplus::FontFamily fontFamily;

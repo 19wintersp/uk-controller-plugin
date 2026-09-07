@@ -1,5 +1,6 @@
 #pragma once
 
+#include "theme/Palette.h"
 #include "theme/PaletteKey.h"
 
 namespace UKControllerPlugin::Theme {
@@ -14,21 +15,24 @@ namespace UKControllerPlugin::Theme {
         static void UnsetInstance();
 
         // Shortcut methods for caller brevity
-        [[nodiscard]] static auto Brush(PaletteKey key) const -> const Gdiplus::SolidBrush&;
-        [[nodiscard]] static auto Pen(PaletteKey key) const -> const Gdiplus::Pen&;
+        [[nodiscard]] static auto Colour(PaletteKey key) -> Gdiplus::Color;
+        [[nodiscard]] static auto Brush(PaletteKey key) -> const Gdiplus::SolidBrush&;
+        [[nodiscard]] static auto Pen(PaletteKey key) -> const Gdiplus::Pen&;
 
+        [[nodiscard]] auto GetColour(PaletteKey key) const -> Gdiplus::Color;
         [[nodiscard]] auto GetBrush(PaletteKey key) const -> const Gdiplus::SolidBrush&;
         [[nodiscard]] auto GetPen(PaletteKey key) const -> const Gdiplus::Pen&;
 
-        void ApplyPalette(const Palette& palette);
+        void ApplyPalette(const Palette* palette);
 
         private:
         ThemeManager();
 
         inline static std::unique_ptr<ThemeManager> instance;
 
-        std::unique_ptr<Gdiplus::SolidBrush> brush_cache[PALETTE_KEY_COUNT];
-        std::unique_ptr<Gdiplus::Pen> pen_cache[PALETTE_KEY_COUNT];
+        Gdiplus::Color colours[PALETTE_KEY_COUNT];
+        std::unique_ptr<Gdiplus::SolidBrush> brushes[PALETTE_KEY_COUNT];
+        std::unique_ptr<Gdiplus::Pen> pens[PALETTE_KEY_COUNT];
     };
 
 } // namespace UKControllerPlugin::Theme

@@ -49,7 +49,6 @@ namespace UKControllerPlugin::Departure {
             *container.plugin,
             *container.controllerPositions,
             *container.activeCallsigns,
-            *container.brushes,
             renderables.ReserveScreenObjectIdentifier(coordinationListRendererId));
 
         renderables.RegisterRenderer(coordinationListRendererId, coordinationList, renderables.afterLists);

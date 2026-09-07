@@ -1,4 +1,8 @@
 #include "ThemeUserSettingHandler.h"
+#include "Palette.h"
+#include "ThemeManager.h"
+#include "ThemeSettings.h"
+#include "euroscope/UserSetting.h"
 
 namespace UKControllerPlugin::Theme {
 
@@ -9,7 +13,12 @@ namespace UKControllerPlugin::Theme {
 
     void ThemeUserSettingHandler::UserSettingsUpdated(Euroscope::UserSetting&)
     {
-        auto palette = Palette::GetPalette(settings.Palette().c_str());
+        UserSettingsUpdated();
+    }
+
+    void ThemeUserSettingHandler::UserSettingsUpdated()
+    {
+        auto palette = Palette::GetPalette(settings->Palette().c_str());
         ThemeManager::Instance().ApplyPalette(palette);
     }
 

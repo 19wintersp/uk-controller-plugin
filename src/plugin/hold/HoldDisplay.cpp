@@ -17,9 +17,9 @@
 #include "geometry/Measurement.h"
 #include "geometry/MeasurementUnit.h"
 #include "graphics/GdiGraphicsInterface.h"
-#include "graphics/GdiplusBrushes.h"
 #include "list/PopupListInterface.h"
 #include "navaids/Navaid.h"
+#include "theme/ThemeManager.h"
 
 using UKControllerPlugin::Dialog::DialogManager;
 using UKControllerPlugin::Euroscope::EuroScopeCFlightPlanInterface;
@@ -28,8 +28,9 @@ using UKControllerPlugin::Euroscope::EuroscopePluginLoopbackInterface;
 using UKControllerPlugin::Euroscope::EuroscopeRadarLoopbackInterface;
 using UKControllerPlugin::Euroscope::UserSetting;
 using UKControllerPlugin::Hold::HoldManager;
+using UKControllerPlugin::Theme::PaletteKey;
+using UKControllerPlugin::Theme::ThemeManager;
 using UKControllerPlugin::Windows::GdiGraphicsInterface;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 
 namespace UKControllerPlugin {
     namespace Hold {
@@ -39,13 +40,12 @@ namespace UKControllerPlugin {
             const Navaids::Navaid& navaid,
             const PublishedHoldCollection& publishedHoldCollection,
             const DialogManager& dialogManager,
-            const GdiplusBrushes& brushes,
             std::shared_ptr<List::PopupListInterface> addAircraftSelector)
             : navaid(navaid), publishedHolds(publishedHoldCollection.GetForFix(navaid.identifier)),
               holdManager(holdManager), plugin(plugin), dialogManager(dialogManager),
               publishedHoldCollection(publishedHoldCollection), addAircraftSelector(addAircraftSelector),
               verticalSpeedAscentPen(Gdiplus::Color(7, 237, 7), 2.5f),
-              verticalSpeedDescentPen(Gdiplus::Color(7, 237, 7), 2.5f), brushes(brushes), fontFamily(L"EuroScope"),
+              verticalSpeedDescentPen(Gdiplus::Color(7, 237, 7), 2.5f), fontFamily(L"EuroScope"),
               font(&fontFamily, 12, Gdiplus::FontStyleBold, Gdiplus::UnitPixel),
               plusFont(&fontFamily, 18, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel),
               stringFormat(Gdiplus::StringFormatFlags::StringFormatFlagsNoClip), dataStartHeight(0),
@@ -677,7 +677,7 @@ namespace UKControllerPlugin {
             path.AddLine(rect.X, rect.Y + rect.Height - (radius * 2), rect.X, rect.Y + radius);
             path.AddArc(rect.X, rect.Y, radius * 2, radius * 2, 180, 90);
             path.CloseFigure();
-            graphics.DrawPath(path, *this->brushes.borderPen);
+            graphics.DrawPath(path, ThemeManager::Pen(PaletteKey::Border));
         }
 
         /*
@@ -692,8 +692,11 @@ namespace UKControllerPlugin {
             Gdiplus::Rect borderRect = {
                 this->windowPos.x, this->windowPos.y, this->windowWidth, this->informationDisplayWindowHeight};
 
-            graphics.FillRect(borderRect, *this->brushes.backgroundBrush);
-            graphics.DrawRect(borderRect, *this->brushes.borderPen);
+            graphics.FillRect(borderRect, ThemeManager::Brush(PaletteKey::Background));
+            graphics.DrawRect(borderRect, ThemeManager::Pen(PaletteKey::Border));
+
+            const auto& textBrush = ThemeManager::Brush(PaletteKey::Text);
+            const auto& textPen = ThemeManager::Pen(PaletteKey::Text);
 
             // Render the title bar
             this->RenderTitleBar(graphics, radarScreen, screenObjectId);
@@ -703,7 +706,7 @@ namespace UKControllerPlugin {
 
             // Render a message if no published holds
             if (this->publishedHolds.empty()) {
-                graphics.DrawString(std::wstring(L"No published holds found."), dataRect, *this->brushes.textBrush);
+                graphics.DrawString(std::wstring(L"No published holds found."), dataRect, textBrush);
                 return;
             }
 
@@ -713,8 +716,8 @@ namespace UKControllerPlugin {
             Gdiplus::Rect buttonRect = {this->windowPos.x + 5, this->titleArea.GetBottom() + 5, 20, 20};
 
             // Left
-            graphics.DrawRect(buttonRect, *this->brushes.textPen);
-            graphics.DrawString(L"<", buttonRect, *this->brushes.textBrush);
+            graphics.DrawRect(buttonRect, textPen);
+            graphics.DrawString(L"<", buttonRect, textBrush);
             radarScreen.RegisterScreenObject(
                 screenObjectId,
                 this->navaid.identifier + "/prevhold",
@@ -723,8 +726,8 @@ namespace UKControllerPlugin {
 
             // Right
             buttonRect.X = this->titleArea.GetRight() - 25;
-            graphics.DrawRect(buttonRect, *this->brushes.textPen);
-            graphics.DrawString(L">", buttonRect, *this->brushes.textBrush);
+            graphics.DrawRect(buttonRect, textPen);
+            graphics.DrawString(L">", buttonRect, textBrush);
             radarScreen.RegisterScreenObject(
                 screenObjectId,
                 this->navaid.identifier + "/nexthold",
@@ -738,41 +741,41 @@ namespace UKControllerPlugin {
                 L"Hold " + std::to_wstring(this->selectedPublishedHoldIndex + 1) + L" of " +
                     std::to_wstring(this->publishedHolds.size()),
                 buttonRect,
-                *this->brushes.textBrush);
+                textBrush);
 
             // Render the data
-            graphics.DrawString(ConvertToTchar(hold->description), dataRect, *this->brushes.textBrush);
+            graphics.DrawString(ConvertToTchar(hold->description), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
             graphics.DrawString(
-                std::wstring(L"Fix: ") + ConvertToTchar(this->navaid.identifier), dataRect, *this->brushes.textBrush);
+                std::wstring(L"Fix: ") + ConvertToTchar(this->navaid.identifier), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
             graphics.DrawString(
-                std::wstring(L"Inbound: ") + ConvertToTchar(hold->inbound), dataRect, *this->brushes.textBrush);
+                std::wstring(L"Inbound: ") + ConvertToTchar(hold->inbound), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
             graphics.DrawString(
-                std::wstring(L"Turn: ") + ConvertToTchar(hold->turnDirection), dataRect, *this->brushes.textBrush);
+                std::wstring(L"Turn: ") + ConvertToTchar(hold->turnDirection), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
             graphics.DrawString(
-                std::wstring(L"Maximum: ") + ConvertToTchar(hold->maximum), dataRect, *this->brushes.textBrush);
+                std::wstring(L"Maximum: ") + ConvertToTchar(hold->maximum), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
             graphics.DrawString(
-                std::wstring(L"Minimum: ") + ConvertToTchar(hold->minimum), dataRect, *this->brushes.textBrush);
+                std::wstring(L"Minimum: ") + ConvertToTchar(hold->minimum), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
 
             if (*hold->outboundLeg->unit == Geometry::MeasurementUnitType::None) {
-                graphics.DrawString(std::wstring(L"Outbound Leg: --"), dataRect, *this->brushes.textBrush);
+                graphics.DrawString(std::wstring(L"Outbound Leg: --"), dataRect, textBrush);
             } else {
                 graphics.DrawString(
                     std::wstring(L"Outbound Leg: ") + FormatOutboundLegValue(hold->outboundLeg->value) + L" " +
                         ConvertToTchar(hold->outboundLeg->unit->description),
                     dataRect,
-                    *this->brushes.textBrush);
+                    textBrush);
             }
         }
 
@@ -786,33 +789,33 @@ namespace UKControllerPlugin {
         {
             // Title bar
             radarScreen.RegisterScreenObject(screenObjectId, this->navaid.identifier, this->titleRect, true);
-            graphics.FillRect(this->titleArea, *this->brushes.headerBrush);
-            graphics.DrawRect(this->titleArea, *this->brushes.borderPen);
+            graphics.FillRect(this->titleArea, ThemeManager::Brush(PaletteKey::Header));
+            graphics.DrawRect(this->titleArea, ThemeManager::Pen(PaletteKey::Border));
 
             std::wstring holdName = ConvertToTchar(this->navaid.identifier);
-            graphics.DrawString(ConvertToTchar(this->navaid.identifier), this->titleArea, *this->brushes.textBrush);
+            graphics.DrawString(ConvertToTchar(this->navaid.identifier), this->titleArea, ThemeManager::Brush(PaletteKey::Text));
             graphics.DrawLine(
-                *this->brushes.borderPen,
+                ThemeManager::Pen(PaletteKey::Border),
                 Gdiplus::Point{this->titleArea.X, this->titleArea.Y + this->titleArea.Height},
                 Gdiplus::Point{this->titleArea.X + this->titleArea.Width, this->titleArea.Y + this->titleArea.Height});
 
             // Minimise Button
-            graphics.FillRect(this->minimiseButtonArea, *this->brushes.backgroundBrush);
-            graphics.DrawRect(this->minimiseButtonArea, *this->brushes.borderPen);
+            graphics.FillRect(this->minimiseButtonArea, ThemeManager::Brush(PaletteKey::Background));
+            graphics.DrawRect(this->minimiseButtonArea, ThemeManager::Pen(PaletteKey::Border));
             radarScreen.RegisterScreenObject(
                 screenObjectId, this->navaid.identifier + "/minimise", this->minimiseClickRect, false);
 
             // Information button
-            graphics.FillRect(this->informationButtonArea, *this->brushes.backgroundBrush);
-            graphics.DrawRect(this->informationButtonArea, *this->brushes.borderPen);
-            graphics.DrawString(L"i", this->informationButtonArea, *this->brushes.textBrush);
+            graphics.FillRect(this->informationButtonArea, ThemeManager::Brush(PaletteKey::Background));
+            graphics.DrawRect(this->informationButtonArea, ThemeManager::Pen(PaletteKey::Border));
+            graphics.DrawString(L"i", this->informationButtonArea, ThemeManager::Brush(PaletteKey::Text));
             radarScreen.RegisterScreenObject(
                 screenObjectId, this->navaid.identifier + "/information", this->informationClickRect, false);
 
             // Options button
-            graphics.FillRect(this->optionsButtonArea, *this->brushes.backgroundBrush);
-            graphics.DrawRect(this->optionsButtonArea, *this->brushes.borderPen);
-            graphics.DrawString(L"o", this->optionsButtonArea, *this->brushes.textBrush);
+            graphics.FillRect(this->optionsButtonArea, ThemeManager::Brush(PaletteKey::Background));
+            graphics.DrawRect(this->optionsButtonArea, ThemeManager::Pen(PaletteKey::Border));
+            graphics.DrawString(L"o", this->optionsButtonArea, ThemeManager::Brush(PaletteKey::Text));
             radarScreen.RegisterScreenObject(
                 screenObjectId, this->navaid.identifier + "/options", this->optionsClickRect, false);
         }
@@ -823,26 +826,26 @@ namespace UKControllerPlugin {
             const int screenObjectId) const
         {
             this->DrawRoundRectangle(graphics, minusButtonRect, 5);
-            graphics.DrawString(L"-", minusButtonRect, *this->brushes.textBrush);
+            graphics.DrawString(L"-", minusButtonRect, ThemeManager::Brush(PaletteKey::Text));
             radarScreen.RegisterScreenObject(
                 screenObjectId, this->navaid.identifier + "/minus", this->minusButtonClickRect, false);
 
             this->DrawRoundRectangle(graphics, plusButtonRect, 5);
-            graphics.DrawString(L"+", plusButtonRect, *this->brushes.textBrush);
+            graphics.DrawString(L"+", plusButtonRect, ThemeManager::Brush(PaletteKey::Text));
             radarScreen.RegisterScreenObject(
                 screenObjectId, this->navaid.identifier + "/plus", this->plusButtonClickRect, false);
 
             this->DrawRoundRectangle(graphics, addButtonRect, 5);
-            graphics.DrawString(L"ADD", addButtonRect, *this->brushes.textBrush);
+            graphics.DrawString(L"ADD", addButtonRect, ThemeManager::Brush(PaletteKey::Text));
             radarScreen.RegisterScreenObject(
                 screenObjectId, this->navaid.identifier + "/add", this->addButtonClickRect, false);
 
             this->DrawRoundRectangle(graphics, allButtonRect, 5);
-            graphics.DrawString(L"ALL", allButtonRect, *this->brushes.textBrush);
+            graphics.DrawString(L"ALL", allButtonRect, ThemeManager::Brush(PaletteKey::Text));
             radarScreen.RegisterScreenObject(
                 screenObjectId, this->navaid.identifier + "/allLevels", this->allButtonClickRect, false);
 
-            graphics.DrawLine(*this->brushes.borderPen, this->underButtonLineLeft, this->underButtonLineRight);
+            graphics.DrawLine(ThemeManager::Pen(PaletteKey::Border), this->underButtonLineLeft, this->underButtonLineRight);
         }
 
         /*
@@ -859,7 +862,7 @@ namespace UKControllerPlugin {
 
             // Render the background
             Gdiplus::Rect backgroundRect = this->GetHoldViewBackgroundRender(holdingAircraft);
-            graphics.FillRect(backgroundRect, *this->brushes.backgroundBrush);
+            graphics.FillRect(backgroundRect, ThemeManager::Brush(PaletteKey::Background));
 
             // Render the title bar
             this->RenderTitleBar(graphics, radarScreen, screenObjectId);
@@ -916,11 +919,11 @@ namespace UKControllerPlugin {
 
                     // Render the restrictions
                     if (levelRestricted) {
-                        graphics.FillRect(holdRow, *this->brushes.borderBrush);
+                        graphics.FillRect(holdRow, ThemeManager::Brush(PaletteKey::Border));
                     }
 
                     // Render the numbers
-                    graphics.DrawString(GetLevelDisplayString(level), numbersDisplay, *this->brushes.textBrush);
+                    graphics.DrawString(GetLevelDisplayString(level), numbersDisplay, ThemeManager::Brush(PaletteKey::Text));
 
                     // Increase the lines
                     holdRow.Y = holdRow.Y + this->lineHeight;
@@ -947,12 +950,12 @@ namespace UKControllerPlugin {
                          ++it) {
                         // Render the restrictions
                         if (levelRestricted) {
-                            graphics.FillRect(holdRow, *this->brushes.borderBrush);
+                            graphics.FillRect(holdRow, ThemeManager::Brush(PaletteKey::Border));
                         }
 
                         // Render the numbers
                         if (aircraftIndex == 0) {
-                            graphics.DrawString(GetLevelDisplayString(level), numbersDisplay, *this->brushes.textBrush);
+                            graphics.DrawString(GetLevelDisplayString(level), numbersDisplay, ThemeManager::Brush(PaletteKey::Text));
                         }
 
                         rt = this->plugin.GetRadarTargetForCallsign((*it)->GetCallsign());
@@ -965,7 +968,7 @@ namespace UKControllerPlugin {
 
                             // Callsign
                             std::wstring callsign = ConvertToTchar((*it)->GetCallsign());
-                            graphics.DrawString(callsign, callsignDisplay, *this->brushes.textBrush);
+                            graphics.DrawString(callsign, callsignDisplay, ThemeManager::Brush(PaletteKey::Text));
                             radarScreen.RegisterScreenObject(
                                 screenObjectId,
                                 this->navaid.identifier + "/callsign/" + fp->GetCallsign(),
@@ -979,7 +982,7 @@ namespace UKControllerPlugin {
                             graphics.DrawString(
                                 GetLevelDisplayString(rt->GetFlightLevel()),
                                 actualLevelDisplay,
-                                *this->brushes.textBrush);
+                                ThemeManager::Brush(PaletteKey::Text));
                             if (GetVerticalSpeedDirection(rt->GetVerticalSpeed()) == 1) {
                                 graphics.DrawLine(
                                     this->verticalSpeedAscentPen,
@@ -997,7 +1000,7 @@ namespace UKControllerPlugin {
                                 fp->GetClearedAltitude() == 0 ? L"---"
                                                               : GetLevelDisplayString(fp->GetClearedAltitude()),
                                 clearedLevelDisplay,
-                                *this->brushes.highlightedAircraftTextBrush);
+                                ThemeManager::Brush(PaletteKey::AircraftTextHighlight));
                             radarScreen.RegisterScreenObject(
                                 screenObjectId,
                                 this->navaid.identifier + "/cleared/" + fp->GetCallsign(),
@@ -1012,7 +1015,7 @@ namespace UKControllerPlugin {
                                 auto holdProximity = (*it)->GetProximityHold(navaid.identifier);
                                 if (holdProximity != nullptr && holdProximity->HasEntered()) {
                                     std::wstring timeString = GetTimeInHoldDisplayString(holdProximity->EnteredAt());
-                                    graphics.DrawString(timeString, timeInHoldDisplay, *this->brushes.textBrush);
+                                    graphics.DrawString(timeString, timeInHoldDisplay, ThemeManager::Brush(PaletteKey::Text));
                                 }
                             }
                         }
@@ -1037,7 +1040,7 @@ namespace UKControllerPlugin {
                             holdRow.Y - (static_cast<INT>(aircraftAtLevel.size()) * this->lineHeight),
                             holdRow.Width - 20,
                             (static_cast<INT>(aircraftAtLevel.size()) * this->lineHeight)};
-                        graphics.DrawRect(boundingBox, *this->brushes.textPen);
+                        graphics.DrawRect(boundingBox, ThemeManager::Pen(PaletteKey::Text));
                     }
                 }
             }
@@ -1049,7 +1052,7 @@ namespace UKControllerPlugin {
                     this->windowPos.y,
                     this->windowPos.x + this->windowWidth,
                     holdRow.Y + this->lineHeight},
-                *this->brushes.borderPen);
+                ThemeManager::Pen(PaletteKey::Border));
         }
 
         void HoldDisplay::PaintWindow(

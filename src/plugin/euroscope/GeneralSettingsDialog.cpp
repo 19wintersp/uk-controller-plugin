@@ -2,15 +2,16 @@
 #include "GeneralSettingsEntries.h"
 #include "UserSetting.h"
 #include "UserSettingAwareCollection.h"
+#include "bootstrap/PersistenceContainer.h"
 #include "dialog/DialogCallArgument.h"
 #include "setting/SettingRepository.h"
 #include "theme/Palette.h"
+#include "theme/ThemeSettings.h"
 
 using UKControllerPlugin::Dialog::DialogCallArgument;
 using UKControllerPlugin::Euroscope::GeneralSettingsEntries;
 using UKControllerPlugin::Euroscope::UserSetting;
 using UKControllerPlugin::Euroscope::UserSettingAwareCollection;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 
 namespace UKControllerPlugin {
     namespace Euroscope {
@@ -18,7 +19,7 @@ namespace UKControllerPlugin {
         GeneralSettingsDialog::GeneralSettingsDialog(
             Bootstrap::PersistenceContainer& container)
             : userSettings(*container.pluginUserSettingHandler), themeSettings(*container.themeSettings), userSettingsHandlers(*container.userSettingHandlers),
-              settings(*container.pluginUserSettingHandler)
+              settings(*container.settingsRepository)
         {
         }
 
@@ -89,18 +90,18 @@ namespace UKControllerPlugin {
             // Colour Palette
             auto selectedColourPalette = themeSettings.Palette();
 
-            for (const auto& palette : Palette::GetPalettes()) {
+            for (const Theme::Palette* palette : Theme::Palette::GetPalettes()) {
                 int insertIndex = SendDlgItemMessage(
-                    hwnd, IDC_COLOUR_PALETTE, CB_INSERTSTRING, NULL, reinterpret_cast<LPARAM>(palette.GetName()));
+                    hwnd, IDC_COLOUR_PALETTE, CB_INSERTSTRING, NULL, reinterpret_cast<LPARAM>(palette->GetName()));
 
                 SendDlgItemMessage(
                     hwnd,
                     IDC_COLOUR_PALETTE,
                     CB_SETITEMDATA,
                     insertIndex,
-                    reinterpret_cast<LPARAM>(palette.GetId()));
+                    reinterpret_cast<LPARAM>(palette->GetId()));
 
-                if (palette.GetId() == selectedColourPalette) {
+                if (palette->GetId() == selectedColourPalette) {
                     SendDlgItemMessage(hwnd, IDC_COLOUR_PALETTE, CB_SETCURSEL, insertIndex, NULL);
                 }
             }

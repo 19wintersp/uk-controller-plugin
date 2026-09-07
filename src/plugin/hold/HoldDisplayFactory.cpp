@@ -8,7 +8,6 @@
 #include "aircraft/CallsignSelectionListFactory.h"
 #include "dialog/DialogManager.h"
 #include "euroscope/EuroscopePluginLoopbackInterface.h"
-#include "graphics/GdiplusBrushes.h"
 #include "navaids/NavaidCollection.h"
 
 using UKControllerPlugin::Dialog::DialogManager;
@@ -16,7 +15,6 @@ using UKControllerPlugin::Euroscope::EuroscopePluginLoopbackInterface;
 using UKControllerPlugin::Hold::HoldManager;
 using UKControllerPlugin::Navaids::Navaid;
 using UKControllerPlugin::Navaids::NavaidCollection;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 
 namespace UKControllerPlugin {
     namespace Hold {
@@ -27,10 +25,9 @@ namespace UKControllerPlugin {
             const NavaidCollection& navaids,
             const PublishedHoldCollection& holds,
             const DialogManager& dialogManager,
-            const Aircraft::CallsignSelectionListFactory& addAircraftListFactory,
-            const GdiplusBrushes& brushes)
+            const Aircraft::CallsignSelectionListFactory& addAircraftListFactory)
             : plugin(plugin), holdManager(holdManager), navaids(navaids), holds(holds), dialogManager(dialogManager),
-              addAircraftListFactory(addAircraftListFactory), brushes(brushes)
+              addAircraftListFactory(addAircraftListFactory)
         {
         }
 
@@ -51,7 +48,6 @@ namespace UKControllerPlugin {
                 navaidData,
                 holds,
                 dialogManager,
-                brushes,
                 addAircraftListFactory.Create(
                     std::make_shared<AddToHoldCallsignProvider>(navaidData, holdManager, plugin),
                     "Add to hold " + navaidData.identifier));

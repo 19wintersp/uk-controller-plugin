@@ -13,26 +13,27 @@ namespace UKControllerPlugin::Theme {
         public:
         [[nodiscard]] auto GetEntry(PaletteKey key) const -> PaletteEntry;
         [[nodiscard]] auto GetId() const -> const char *;
-        [[nodiscard]] auto GetName() const -> const char *;
+        [[nodiscard]] auto GetName() const -> const wchar_t *;
 
-        [[nodiscard]] static auto GetPalettes() const -> const std::vector<const Palette&>&;
-        [[nodiscard]] static auto GetPalette(const char* id) const -> const Palette&;
+        [[nodiscard]] static auto GetPalettes() -> const std::vector<const Palette*>&;
+        [[nodiscard]] static auto GetPalette(const char* id) -> const Palette*;
 
         constexpr Palette(
-            const char* id, const char* name, std::initializer_list<std::pair<PaletteKey, PaletteEntry>> entries);
+            const char* id, const wchar_t* name, std::initializer_list<std::pair<PaletteKey, PaletteEntry>> entries);
         constexpr Palette(
             const char* id,
-            const char* name,
+            const wchar_t* name,
             const Palette& base,
             std::initializer_list<std::pair<PaletteKey, PaletteEntry>> overrides);
 
-        static const std::string DEFAULT = "default";
+        constexpr static const char *Palette::DEFAULT = "default";
 
         private:
-        const char *id, *name;
+        const char *id;
+        const wchar_t *name;
         PaletteEntry entries[PALETTE_KEY_COUNT];
 
-        static const std::vector<const Palette&> PALETTES;
+        static const std::vector<const Palette*> PALETTES;
     };
 
 } // namespace UKControllerPlugin::Theme

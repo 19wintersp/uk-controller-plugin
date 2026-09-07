@@ -16,7 +16,6 @@ namespace UKControllerPlugin {
     } // namespace Euroscope
     namespace Windows {
         class GdiGraphicsInterface;
-        struct GdiplusBrushes;
     } // namespace Windows
 } // namespace UKControllerPlugin
 
@@ -36,7 +35,6 @@ namespace UKControllerPlugin::Wake {
             std::shared_ptr<List::PopupListInterface> followCallsignSelector,
             std::shared_ptr<List::PopupListInterface> wakeSchemeSelector,
             Euroscope::EuroscopePluginLoopbackInterface& plugin,
-            const UKControllerPlugin::Windows::GdiplusBrushes& brushes,
             int screenObjectId);
         [[nodiscard]] auto IsVisible() const -> bool override;
         [[nodiscard]] auto IsCollapsed() const -> bool;
@@ -98,9 +96,6 @@ namespace UKControllerPlugin::Wake {
 
         // The titlebar
         std::shared_ptr<Components::TitleBar> titleBar;
-
-        // Pens and brushes
-        const UKControllerPlugin::Windows::GdiplusBrushes& brushes;
 
         // Drawing rects
         Gdiplus::Rect contentArea;
