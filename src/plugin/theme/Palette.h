@@ -26,7 +26,7 @@ namespace UKControllerPlugin::Theme {
             const Palette& base,
             std::initializer_list<std::pair<PaletteKey, PaletteEntry>> overrides);
 
-        constexpr static const char *Palette::DEFAULT = "default";
+        constexpr static const char *DEFAULT = "default";
 
         private:
         const char *id;
