@@ -4,7 +4,6 @@
 #include "plugin/FunctionCallEventHandler.h"
 #include "radarscreen/RadarRenderableCollection.h"
 #include "radarscreen/ConfigurableDisplayCollection.h"
-#include "graphics/GdiplusBrushes.h"
 #include "euroscope/AsrEventHandlerCollection.h"
 #include "curl/CurlRequest.h"
 #include "push/PushEventProcessorCollection.h"
@@ -23,7 +22,6 @@ using UKControllerPlugin::Plugin::FunctionCallEventHandler;
 using UKControllerPlugin::Push::PushEventProcessorCollection;
 using UKControllerPlugin::RadarScreen::ConfigurableDisplayCollection;
 using UKControllerPlugin::RadarScreen::RadarRenderableCollection;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 using UKControllerPluginTest::Api::MockApiInterface;
 using UKControllerPluginTest::Dialog::MockDialogProvider;
 using UKControllerPluginTest::TaskManager::MockTaskRunnerInterface;
@@ -50,7 +48,6 @@ namespace UKControllerPluginTest {
             MinStackManager managerObject;
             RadarRenderableCollection radarRenderables;
             ConfigurableDisplayCollection configruables;
-            GdiplusBrushes brushes;
             AsrEventHandlerCollection userSettingHandlers;
         };
 
@@ -98,7 +95,6 @@ namespace UKControllerPluginTest {
                 this->managerObject,
                 this->radarRenderables,
                 this->configruables,
-                this->brushes,
                 this->userSettingHandlers,
                 this->dialogManager);
             EXPECT_EQ(1, functionHandlers.CountCallbacks());
@@ -112,7 +108,6 @@ namespace UKControllerPluginTest {
                 this->managerObject,
                 this->radarRenderables,
                 this->configruables,
-                this->brushes,
                 this->userSettingHandlers,
                 this->dialogManager);
             EXPECT_EQ(1, radarRenderables.CountRenderers());
@@ -126,7 +121,6 @@ namespace UKControllerPluginTest {
                 this->managerObject,
                 this->radarRenderables,
                 this->configruables,
-                this->brushes,
                 this->userSettingHandlers,
                 this->dialogManager);
             EXPECT_EQ(3, radarRenderables.CountScreenObjects());
@@ -139,7 +133,6 @@ namespace UKControllerPluginTest {
                 this->managerObject,
                 this->radarRenderables,
                 this->configruables,
-                this->brushes,
                 this->userSettingHandlers,
                 this->dialogManager);
             EXPECT_EQ(1, configruables.CountDisplays());
@@ -152,7 +145,6 @@ namespace UKControllerPluginTest {
                 this->managerObject,
                 this->radarRenderables,
                 this->configruables,
-                this->brushes,
                 this->userSettingHandlers,
                 this->dialogManager);
             EXPECT_EQ(1, userSettingHandlers.CountHandlers());

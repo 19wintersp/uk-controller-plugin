@@ -2,7 +2,6 @@
 #include "aircraft/CallsignSelectionListFactory.h"
 #include "bootstrap/ModuleBootstrap.h"
 #include "controller/ActiveCallsignCollection.h"
-#include "graphics/GdiplusBrushes.h"
 #include "list/PopupListFactory.h"
 #include "plugin/FunctionCallEventHandler.h"
 #include "plugin/UKPlugin.h"
@@ -15,7 +14,6 @@ using UKControllerPlugin::List::PopupListFactory;
 using UKControllerPlugin::Plugin::FunctionCallEventHandler;
 using UKControllerPlugin::Tag::TagItemCollection;
 using UKControllerPlugin::TimedEvent::TimedEventCollection;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 
 namespace UKControllerPluginTest {
 
@@ -48,7 +46,6 @@ namespace UKControllerPluginTest {
         container.tagHandler = std::make_unique<TagItemCollection>();
         container.timedHandler = std::make_unique<TimedEventCollection>();
         container.activeCallsigns = std::make_unique<UKControllerPlugin::Controller::ActiveCallsignCollection>();
-        container.brushes = std::make_unique<GdiplusBrushes>();
         return container;
     }
 } // namespace UKControllerPluginTest

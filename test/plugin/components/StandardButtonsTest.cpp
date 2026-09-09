@@ -1,10 +1,8 @@
 #include "components/StandardButtons.h"
-#include "graphics/GdiplusBrushes.h"
 
 using testing::_;
 using UKControllerPlugin::Components::CloseButton;
 using UKControllerPlugin::Components::CollapseButton;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 
 namespace UKControllerPluginTest::Components {
 
@@ -12,19 +10,18 @@ namespace UKControllerPluginTest::Components {
     {
         public:
         StandardButtonsTest() = default;
-        GdiplusBrushes brushes;
         testing::NiceMock<Windows::MockGraphicsInterface> mockGraphics;
     };
 
     TEST_F(StandardButtonsTest, CloseButtonThemedDoesNotCrash)
     {
-        auto button = CloseButton(brushes);
+        auto button = CloseButton();
         EXPECT_NE(nullptr, button.target_type().name());
     }
 
     TEST_F(StandardButtonsTest, CollapseButtonThemedDoesNotCrash)
     {
-        auto button = CollapseButton(brushes, []() { return false; });
+        auto button = CollapseButton([]() { return false; });
         EXPECT_NE(nullptr, button.target_type().name());
     }
 

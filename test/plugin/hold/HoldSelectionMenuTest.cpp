@@ -2,7 +2,6 @@
 #include "aircraft/CallsignSelectionListFactory.h"
 #include "dialog/DialogManager.h"
 #include "euroscope/UserSetting.h"
-#include "graphics/GdiplusBrushes.h"
 #include "hold/AbstractHoldLevelRestriction.h"
 #include "hold/DeemedSeparatedHold.h"
 #include "hold/HoldDisplay.h"
@@ -32,7 +31,6 @@ using UKControllerPlugin::List::PopupListFactory;
 using UKControllerPlugin::Navaids::NavaidCollection;
 using UKControllerPlugin::Plugin::FunctionCallEventHandler;
 using UKControllerPlugin::Plugin::PopupMenuItem;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 using UKControllerPluginTest::Api::MockApiInterface;
 using UKControllerPluginTest::Dialog::MockDialogProvider;
 using UKControllerPluginTest::Euroscope::MockEuroScopeCFlightPlanInterface;
@@ -50,7 +48,7 @@ namespace UKControllerPluginTest {
             HoldSelectionMenuTest()
                 : popupFactory(functionHandlers, mockPlugin), listFactory(popupFactory),
                   dialogManager(mockDialogProvider), userSetting(mockUserSettingProvider),
-                  displayFactory(mockPlugin, holdManager, navaids, holds, dialogManager, listFactory, brushes),
+                  displayFactory(mockPlugin, holdManager, navaids, holds, dialogManager, listFactory),
                   holdManager(mockApi, mockTaskRunner), holdSelectionMenu(holdManager, mockPlugin, 1)
             {
                 this->mockFlightplan.reset(new NiceMock<MockEuroScopeCFlightPlanInterface>);
@@ -81,7 +79,6 @@ namespace UKControllerPluginTest {
             NavaidCollection navaids;
             PublishedHoldCollection holds;
             UserSetting userSetting;
-            GdiplusBrushes brushes;
             HoldDisplayFactory displayFactory;
             HoldManager holdManager;
             HoldSelectionMenu holdSelectionMenu;

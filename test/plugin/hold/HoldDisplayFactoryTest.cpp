@@ -1,7 +1,6 @@
 #include "hold/HoldDisplayFactory.h"
 #include "aircraft/CallsignSelectionListFactory.h"
 #include "dialog/DialogManager.h"
-#include "graphics/GdiplusBrushes.h"
 #include "hold/AbstractHoldLevelRestriction.h"
 #include "hold/DeemedSeparatedHold.h"
 #include "hold/HoldDisplay.h"
@@ -26,7 +25,6 @@ using UKControllerPlugin::List::PopupListFactory;
 using UKControllerPlugin::Navaids::Navaid;
 using UKControllerPlugin::Navaids::NavaidCollection;
 using UKControllerPlugin::Plugin::FunctionCallEventHandler;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 using UKControllerPluginTest::Api::MockApiInterface;
 using UKControllerPluginTest::Dialog::MockDialogProvider;
 using UKControllerPluginTest::Euroscope::MockEuroscopePluginLoopbackInterface;
@@ -41,7 +39,7 @@ namespace UKControllerPluginTest::Hold {
             : dialogManager(dialogProvider), popupFactory(functionHandlers, mockPlugin),
               callsignSelectionFactory(popupFactory), navaid({1, "TIMBA", EuroScopePlugIn::CPosition()}),
               holdManager(mockApi, taskRunner),
-              factory(mockPlugin, holdManager, navaids, holds, dialogManager, callsignSelectionFactory, brushes)
+              factory(mockPlugin, holdManager, navaids, holds, dialogManager, callsignSelectionFactory)
 
         {
             this->navaids.AddNavaid(navaid);
@@ -61,7 +59,6 @@ namespace UKControllerPluginTest::Hold {
         Navaid navaid;
         NavaidCollection navaids;
         HoldManager holdManager;
-        GdiplusBrushes brushes;
         HoldDisplayFactory factory;
     };
 

@@ -2,7 +2,6 @@
 #include "dialog/DialogData.h"
 #include "dialog/DialogManager.h"
 #include "euroscope/UserSetting.h"
-#include "graphics/GdiplusBrushes.h"
 #include "hold/AbstractHoldLevelRestriction.h"
 #include "hold/CompareHoldingAircraft.h"
 #include "hold/DeemedSeparatedHold.h"
@@ -30,7 +29,6 @@ using UKControllerPlugin::Hold::HoldManager;
 using UKControllerPlugin::Hold::ProximityHold;
 using UKControllerPlugin::Hold::PublishedHoldCollection;
 using UKControllerPlugin::Navaids::Navaid;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 using UKControllerPluginTest::Api::MockApiInterface;
 using UKControllerPluginTest::Dialog::MockDialogProvider;
 using UKControllerPluginTest::Euroscope::MockEuroScopeCFlightPlanInterface;
@@ -50,7 +48,7 @@ namespace UKControllerPluginTest {
                 : addAircraftList(std::make_shared<NiceMock<List::MockPopupList>>()), dialogManager(mockDialogProvider),
                   userSetting(mockUserSettingProvider), navaid({2, "TIMBA", EuroScopePlugIn::CPosition()}),
                   holdManager(mockApi, mockTaskRunner),
-                  display(mockPlugin, holdManager, navaid, publishedHolds, dialogManager, brushes, addAircraftList)
+                  display(mockPlugin, holdManager, navaid, publishedHolds, dialogManager, addAircraftList)
             {
                 this->dialogManager.AddDialog(this->holdDialogData);
                 this->navaid.coordinates.LoadFromStrings("E000.15.42.000", "N050.56.44.000");
@@ -79,7 +77,6 @@ namespace UKControllerPluginTest {
             UserSetting userSetting;
             Navaid navaid;
             HoldManager holdManager;
-            GdiplusBrushes brushes;
             HoldDisplay display;
         };
 
@@ -112,7 +109,7 @@ namespace UKControllerPluginTest {
             this->publishedHolds.Add({1, "TIMBA", "TIMBA", 2000, 3000});
 
             HoldDisplay display2(
-                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, this->brushes, addAircraftList);
+                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, addAircraftList);
             ON_CALL(this->mockUserSettingProvider, GetKey("holdTIMBAMinLevel")).WillByDefault(Return(""));
 
             display2.LoadDataFromAsr(userSetting);
@@ -139,7 +136,7 @@ namespace UKControllerPluginTest {
         {
             this->publishedHolds.Add({1, "TIMBA", "TIMBA", 2000, 3000});
             HoldDisplay display2(
-                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, this->brushes, addAircraftList);
+                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, addAircraftList);
             ON_CALL(this->mockUserSettingProvider, GetKey("holdTIMBAMaxLevel")).WillByDefault(Return(""));
 
             display2.LoadDataFromAsr(userSetting);
@@ -225,7 +222,7 @@ namespace UKControllerPluginTest {
             this->publishedHolds.Add({4, "TIMBA", "TIMBA", 2000, 3000});
 
             HoldDisplay display2(
-                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, this->brushes, addAircraftList);
+                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, addAircraftList);
 
             EXPECT_EQ(0, display2.GetPublishedHoldIndex());
             display2.ButtonClicked("nexthold");
@@ -708,7 +705,7 @@ namespace UKControllerPluginTest {
                 15000,
             });
             HoldDisplay display2(
-                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, this->brushes, addAircraftList);
+                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, addAircraftList);
             display2.SetMinimumLevel(7000);
             display2.SetMaximumLevel(15000);
 
@@ -765,7 +762,7 @@ namespace UKControllerPluginTest {
                 15000,
             });
             HoldDisplay display2(
-                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, this->brushes, addAircraftList);
+                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, addAircraftList);
             display2.SetMinimumLevel(7000);
             display2.SetMaximumLevel(15000);
 
@@ -823,7 +820,7 @@ namespace UKControllerPluginTest {
                 15000,
             });
             HoldDisplay display2(
-                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, this->brushes, addAircraftList);
+                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, addAircraftList);
             display2.SetMinimumLevel(7000);
             display2.SetMaximumLevel(15000);
 
@@ -882,7 +879,7 @@ namespace UKControllerPluginTest {
                 15000,
             });
             HoldDisplay display2(
-                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, this->brushes, addAircraftList);
+                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, addAircraftList);
             display2.SetMinimumLevel(7000);
             display2.SetMaximumLevel(15000);
 
@@ -946,7 +943,7 @@ namespace UKControllerPluginTest {
                 15000,
             });
             HoldDisplay display2(
-                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, this->brushes, addAircraftList);
+                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, addAircraftList);
             display2.SetMinimumLevel(7000);
             display2.SetMaximumLevel(15000);
 
@@ -1005,7 +1002,7 @@ namespace UKControllerPluginTest {
                 15000,
             });
             HoldDisplay display2(
-                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, this->brushes, addAircraftList);
+                mockPlugin, holdManager, navaid, publishedHolds, dialogManager, addAircraftList);
             display2.SetMinimumLevel(7000);
             display2.SetMaximumLevel(15000);
 

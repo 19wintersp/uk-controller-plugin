@@ -1,6 +1,5 @@
 #include "dialog/DialogManager.h"
 #include "euroscope/UserSetting.h"
-#include "graphics/GdiplusBrushes.h"
 #include "helper/TestingFunctions.h"
 #include "minstack/MinStackLevel.h"
 #include "minstack/MinStackManager.h"
@@ -18,7 +17,6 @@ using UKControllerPlugin::MinStack::MinStackManager;
 using UKControllerPlugin::MinStack::MinStackRenderer;
 using UKControllerPlugin::MinStack::MinStackRendererConfiguration;
 using UKControllerPlugin::Plugin::PopupMenuItem;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 using UKControllerPluginTest::Dialog::MockDialogProvider;
 using UKControllerPluginTest::Euroscope::MockEuroscopeRadarScreenLoopbackInterface;
 using UKControllerPluginTest::Euroscope::MockUserSettingProviderInterface;
@@ -30,7 +28,7 @@ namespace UKControllerPluginTest::MinStack {
         public:
         MinStackRendererTest()
             : dialogManager(mockDialogProvider), settings(mockUserSettingProvider),
-              renderer(manager, 1, 2, 3, 4, brushes, dialogManager)
+              renderer(manager, 1, 2, 3, 4, dialogManager)
 
         {
             this->dialogManager.AddDialog(this->minStackDialogData);
@@ -38,7 +36,6 @@ namespace UKControllerPluginTest::MinStack {
 
         DialogData minStackDialogData = {IDD_MINSTACK, "Test"};
         MinStackManager manager;
-        GdiplusBrushes brushes;
         NiceMock<MockEuroscopeRadarScreenLoopbackInterface> mockRadarScreen;
         NiceMock<MockUserSettingProviderInterface> mockUserSettingProvider;
         NiceMock<MockDialogProvider> mockDialogProvider;

@@ -4,7 +4,6 @@
 #include "curl/CurlRequest.h"
 #include "dialog/DialogManager.h"
 #include "graphics/GdiGraphicsWrapper.h"
-#include "graphics/GdiplusBrushes.h"
 #include "helper/HelperFunctions.h"
 
 using UKControllerPlugin::HelperFunctions;
@@ -71,15 +70,6 @@ namespace UKControllerPluginTest::Bootstrap {
         ExternalsBootstrap::Bootstrap(container, dll);
 
         EXPECT_EQ(0, container.dialogManager->CountDialogs());
-    }
-
-    TEST_F(ExternalsBootstrapTest, BootstrapCreatesBrushes)
-    {
-        PersistenceContainer container;
-        HINSTANCE dll = 0;
-        ExternalsBootstrap::Bootstrap(container, dll);
-
-        EXPECT_EQ(container.brushes->euroscopeBackground.GetR(), 11);
     }
 
     TEST_F(ExternalsBootstrapTest, BootstrapCreatesGraphicsWrapper)

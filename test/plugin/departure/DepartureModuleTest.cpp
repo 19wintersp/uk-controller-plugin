@@ -9,7 +9,6 @@
 #include "eventhandler/EventBus.h"
 #include "eventhandler/EventStream.h"
 #include "flightplan/FlightPlanEventHandlerCollection.h"
-#include "graphics/GdiplusBrushes.h"
 #include "mock/MockDepartureHandoffResolver.h"
 #include "ownership/AirfieldServiceProviderCollection.h"
 #include "plugin/FunctionCallEventHandler.h"
@@ -37,7 +36,6 @@ using UKControllerPlugin::RadarScreen::ConfigurableDisplayCollection;
 using UKControllerPlugin::RadarScreen::RadarRenderableCollection;
 using UKControllerPlugin::Tag::TagItemCollection;
 using UKControllerPlugin::TimedEvent::TimedEventCollection;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 using UKControllerPluginTest::Dependency::MockDependencyLoader;
 using UKControllerPluginTest::Dialog::MockDialogProvider;
 using UKControllerPluginTest::Euroscope::MockEuroscopePluginLoopbackInterface;
@@ -60,7 +58,6 @@ namespace UKControllerPluginTest::Departure {
                 std::make_shared<testing::NiceMock<Handoff::MockDepartureHandoffResolver>>();
             container.airfieldOwnership =
                 std::make_shared<UKControllerPlugin::Ownership::AirfieldServiceProviderCollection>();
-            this->container.brushes = std::make_unique<GdiplusBrushes>();
         }
 
         PersistenceContainer container;

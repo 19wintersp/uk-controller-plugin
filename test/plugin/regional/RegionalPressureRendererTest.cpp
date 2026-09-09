@@ -1,7 +1,6 @@
 #include "regional/RegionalPressureRenderer.h"
 #include "dialog/DialogManager.h"
 #include "euroscope/UserSetting.h"
-#include "graphics/GdiplusBrushes.h"
 #include "helper/TestingFunctions.h"
 #include "plugin/PopupMenuItem.h"
 #include "regional/RegionalPressureManager.h"
@@ -18,7 +17,6 @@ using UKControllerPlugin::Plugin::PopupMenuItem;
 using UKControllerPlugin::Regional::RegionalPressureManager;
 using UKControllerPlugin::Regional::RegionalPressureRenderer;
 using UKControllerPlugin::Regional::RegionalPressureRendererConfiguration;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 using UKControllerPluginTest::Dialog::MockDialogProvider;
 using UKControllerPluginTest::Euroscope::MockEuroscopeRadarScreenLoopbackInterface;
 using UKControllerPluginTest::Euroscope::MockUserSettingProviderInterface;
@@ -31,7 +29,7 @@ namespace UKControllerPluginTest {
             public:
             RegionalPressureRendererTest()
                 : userSettings(mockUserSettingProvider), dialogManager(mockDialogProvider),
-                  renderer(manager, 1, 2, 3, 4, brushes, dialogManager)
+                  renderer(manager, 1, 2, 3, 4, dialogManager)
             {
                 this->dialogManager.AddDialog(this->rpsDialogData);
             }
@@ -49,7 +47,6 @@ namespace UKControllerPluginTest {
             const std::string YPOS_ASR_DESC = "Regional Pressure Y Position";
             DialogData rpsDialogData = {IDD_REGIONAL_PRESSURE, "Test"};
             RegionalPressureManager manager;
-            GdiplusBrushes brushes;
             NiceMock<MockEuroscopeRadarScreenLoopbackInterface> mockRadarScreen;
             NiceMock<MockUserSettingProviderInterface> mockUserSettingProvider;
             NiceMock<MockDialogProvider> mockDialogProvider;

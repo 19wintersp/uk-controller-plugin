@@ -160,11 +160,6 @@ set(test__geometry
         geometry/LengthTest.cpp)
 source_group("test\\geometry" FILES ${test__geometry})
 
-set(test__graphics
-    "graphics/GdiplusBrushesTest.cpp"
-    "graphics/ThemeTest.cpp")
-source_group("test\\graphics" FILES ${test__graphics})
-
 set(test__handoff
     "handoff/HandoffCollectionFactoryTest.cpp"
     "handoff/HandoffCollectionTest.cpp"
@@ -646,7 +641,6 @@ set(ALL_FILES
     ${test__flightplan}
     ${test__flightrule}
     ${test__geometry}
-    ${test__graphics}
     ${test__handoff}
     ${test__headings}
     ${test__historytrail}

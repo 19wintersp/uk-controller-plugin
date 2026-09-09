@@ -3,7 +3,6 @@
 #include "bootstrap/PersistenceContainer.h"
 #include "euroscope/AsrEventHandlerCollection.h"
 #include "flightplan/FlightPlanEventHandlerCollection.h"
-#include "graphics/GdiplusBrushes.h"
 #include "list/PopupListFactory.h"
 #include "plugin/FunctionCallEventHandler.h"
 #include "radarscreen/ConfigurableDisplayCollection.h"
@@ -27,7 +26,6 @@ using UKControllerPlugin::RadarScreen::RadarRenderableCollection;
 using UKControllerPlugin::Tag::TagItemCollection;
 using UKControllerPlugin::Wake::BootstrapPlugin;
 using UKControllerPlugin::Wake::BootstrapRadarScreen;
-using UKControllerPlugin::Windows::GdiplusBrushes;
 using UKControllerPluginTest::Dependency::MockDependencyLoader;
 
 namespace UKControllerPluginTest::Wake {
@@ -42,7 +40,6 @@ namespace UKControllerPluginTest::Wake {
             container.popupListFactory = std::make_unique<PopupListFactory>(functionCalls, mockPlugin);
             container.callsignSelectionListFactory =
                 std::make_unique<CallsignSelectionListFactory>(*container.popupListFactory);
-            container.brushes = std::make_unique<GdiplusBrushes>();
         }
 
         ConfigurableDisplayCollection configurableDisplays;
@@ -123,7 +120,7 @@ namespace UKControllerPluginTest::Wake {
     {
         BootstrapPlugin(this->container, this->dependencies);
         BootstrapRadarScreen(
-            this->container, radarRenderables, asrEventHandlers, toggleableFactory, *this->container.brushes);
+            this->container, radarRenderables, asrEventHandlers, toggleableFactory);
         EXPECT_EQ(1, radarRenderables.CountRenderers());
         EXPECT_EQ(1, radarRenderables.CountRenderersInPhase(radarRenderables.afterLists));
     }
@@ -132,7 +129,7 @@ namespace UKControllerPluginTest::Wake {
     {
         BootstrapPlugin(this->container, this->dependencies);
         BootstrapRadarScreen(
-            this->container, radarRenderables, asrEventHandlers, toggleableFactory, *this->container.brushes);
+            this->container, radarRenderables, asrEventHandlers, toggleableFactory);
         EXPECT_EQ(1, asrEventHandlers.CountHandlers());
     }
 
@@ -140,7 +137,7 @@ namespace UKControllerPluginTest::Wake {
     {
         BootstrapPlugin(this->container, this->dependencies);
         BootstrapRadarScreen(
-            this->container, radarRenderables, asrEventHandlers, toggleableFactory, *this->container.brushes);
+            this->container, radarRenderables, asrEventHandlers, toggleableFactory);
         EXPECT_TRUE(functionCalls.HasCallbackByDescription("Wake Calculator Lead Aircraft"));
     }
 
@@ -148,7 +145,7 @@ namespace UKControllerPluginTest::Wake {
     {
         BootstrapPlugin(this->container, this->dependencies);
         BootstrapRadarScreen(
-            this->container, radarRenderables, asrEventHandlers, toggleableFactory, *this->container.brushes);
+            this->container, radarRenderables, asrEventHandlers, toggleableFactory);
         EXPECT_TRUE(functionCalls.HasCallbackByDescription("Wake Calculator Following Aircraft"));
     }
 
@@ -156,7 +153,7 @@ namespace UKControllerPluginTest::Wake {
     {
         BootstrapPlugin(this->container, this->dependencies);
         BootstrapRadarScreen(
-            this->container, radarRenderables, asrEventHandlers, toggleableFactory, *this->container.brushes);
+            this->container, radarRenderables, asrEventHandlers, toggleableFactory);
         EXPECT_TRUE(functionCalls.HasCallbackByDescription("Wake Calculator Scheme"));
     }
 
@@ -164,7 +161,7 @@ namespace UKControllerPluginTest::Wake {
     {
         BootstrapPlugin(this->container, this->dependencies);
         BootstrapRadarScreen(
-            this->container, radarRenderables, asrEventHandlers, toggleableFactory, *this->container.brushes);
+            this->container, radarRenderables, asrEventHandlers, toggleableFactory);
         EXPECT_TRUE(functionCalls.HasCallbackByDescription("Toggle Wake Turbulence Calculator"));
     }
 } // namespace UKControllerPluginTest::Wake
