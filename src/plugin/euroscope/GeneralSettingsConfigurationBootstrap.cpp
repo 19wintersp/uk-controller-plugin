@@ -32,8 +32,7 @@ namespace UKControllerPlugin {
         void GeneralSettingsConfigurationBootstrap::BootstrapPlugin(Bootstrap::PersistenceContainer& container)
         {
             BootstrapReleaseChannelSettings(*container.settingsRepository, *container.windows);
-            std::shared_ptr<GeneralSettingsDialog> dialog =
-                std::make_shared<GeneralSettingsDialog>(container);
+            std::shared_ptr<GeneralSettingsDialog> dialog = std::make_shared<GeneralSettingsDialog>(container);
             container.dialogManager->AddDialog(
                 {IDD_GENERAL_SETTINGS,
                  "General Settings",

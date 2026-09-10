@@ -37,8 +37,10 @@ namespace UKControllerPlugin::Departure {
           activeCallsigns(activeCallsigns), screenObjectId(screenObjectId)
     {
         // temporary, until refactors integrate highlighted headers into the titlebar code
-        this->brushSwitcher = Components::BrushSwitcher::Create(std::make_shared<Gdiplus::SolidBrush>(Gdiplus::Color(0x82, 0x32, 0x9a)), std::chrono::seconds(2))
-                                  ->AdditionalBrush(std::make_shared<Gdiplus::SolidBrush>(Gdiplus::Color(0xff, 0x99, 0xff)));
+        this->brushSwitcher =
+            Components::BrushSwitcher::Create(
+                std::make_shared<Gdiplus::SolidBrush>(Gdiplus::Color(0x82, 0x32, 0x9a)), std::chrono::seconds(2))
+                ->AdditionalBrush(std::make_shared<Gdiplus::SolidBrush>(Gdiplus::Color(0xff, 0x99, 0xff)));
 
         this->titleBar = Components::TitleBar::Create(
                              L"Departure Coordination Requests", {0, 0, this->titleBarWidth, this->titleBarHeight})
@@ -48,10 +50,9 @@ namespace UKControllerPlugin::Departure {
             closeButtonOffset, this->screenObjectId, "closeButton", Components::CloseButton());
 
         this->collapseButton = Components::Button::Create(
-            collapseButtonOffset,
-            this->screenObjectId,
-            "collapseButton",
-            Components::CollapseButton([this] { return this->contentCollapsed; }));
+            collapseButtonOffset, this->screenObjectId, "collapseButton", Components::CollapseButton([this] {
+                return this->contentCollapsed;
+            }));
     }
 
     void DepartureCoordinationList::LeftClick(
@@ -193,16 +194,14 @@ namespace UKControllerPlugin::Departure {
 
                     // Type column
                     const std::string itemType = listItem.index() == 0 ? "Rls" : "Pre";
-                    graphics.DrawString(
-                        HelperFunctions::ConvertToWideString(itemType), typeColumn, textBrush);
+                    graphics.DrawString(HelperFunctions::ConvertToWideString(itemType), typeColumn, textBrush);
 
                     // Callsign column
                     const std::string callsign =
                         listItem.index() == 0
                             ? std::get<std::shared_ptr<Releases::DepartureReleaseRequest>>(listItem)->Callsign()
                             : std::get<std::shared_ptr<Prenote::PrenoteMessage>>(listItem)->GetCallsign();
-                    graphics.DrawString(
-                        HelperFunctions::ConvertToWideString(callsign), callsignColumn, textBrush);
+                    graphics.DrawString(HelperFunctions::ConvertToWideString(callsign), callsignColumn, textBrush);
                     std::shared_ptr<Components::ClickableArea> callsignClickspot = Components::ClickableArea::Create(
                         callsignColumn, this->screenObjectId, itemType + "." + callsign, false);
                     callsignClickspot->Apply(graphics, radarScreen);
@@ -226,13 +225,10 @@ namespace UKControllerPlugin::Departure {
                     graphics.DrawString(
                         HelperFunctions::ConvertToWideString(fp->GetOrigin()), airportColumn, textBrush);
 
-                    graphics.DrawString(
-                        HelperFunctions::ConvertToWideString(fp->GetSidName()), sidColumn, textBrush);
+                    graphics.DrawString(HelperFunctions::ConvertToWideString(fp->GetSidName()), sidColumn, textBrush);
 
                     graphics.DrawString(
-                        HelperFunctions::ConvertToWideString(fp->GetDestination()),
-                        destColumn,
-                        textBrush);
+                        HelperFunctions::ConvertToWideString(fp->GetDestination()), destColumn, textBrush);
                 } while (nextRelease != decisions.cend() || nextPrenote != prenoteMessages.cend());
             });
 

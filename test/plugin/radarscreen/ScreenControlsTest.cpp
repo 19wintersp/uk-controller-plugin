@@ -1,9 +1,9 @@
+#include "radarscreen/ScreenControls.h"
 #include "helper/Matchers.h"
 #include "helper/TestingFunctions.h"
 #include "plugin/PopupMenuItem.h"
 #include "radarscreen/ConfigurableDisplayCollection.h"
 #include "radarscreen/ConfigurableDisplayInterface.h"
-#include "radarscreen/ScreenControls.h"
 
 using ::testing::Return;
 using ::testing::StrictMock;

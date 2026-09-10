@@ -1,9 +1,9 @@
+#include "minstack/MinStackRenderer.h"
 #include "dialog/DialogManager.h"
 #include "euroscope/UserSetting.h"
 #include "helper/TestingFunctions.h"
 #include "minstack/MinStackLevel.h"
 #include "minstack/MinStackManager.h"
-#include "minstack/MinStackRenderer.h"
 
 using ::testing::_;
 using ::testing::NiceMock;

@@ -189,8 +189,7 @@ namespace UKControllerPlugin::Approach {
 
     void ApproachSequencerDisplay::RenderDivider(Windows::GdiGraphicsInterface& graphics)
     {
-        graphics.DrawLine(
-            ThemeManager::Pen(PaletteKey::Text), dividerLeft, dividerRight);
+        graphics.DrawLine(ThemeManager::Pen(PaletteKey::Text), dividerLeft, dividerRight);
     }
 
     void ApproachSequencerDisplay::RenderHeaders(Windows::GdiGraphicsInterface& graphics)
@@ -254,16 +253,13 @@ namespace UKControllerPlugin::Approach {
         while (aircraftToProcess != nullptr) {
             graphics.DrawString(std::to_wstring(sequenceNumber), numberRect, brush);
             graphics.DrawString(
-                HelperFunctions::ConvertToWideString(aircraftToProcess->Callsign()),
-                callsignRect,
-                brush);
+                HelperFunctions::ConvertToWideString(aircraftToProcess->Callsign()), callsignRect, brush);
 
             // The target distance / wake
             if (aircraftToProcess->Mode() == ApproachSequencingMode::WakeTurbulence) {
                 graphics.DrawString(L"Wake", targetRect, brush);
             } else {
-                graphics.DrawString(
-                    To1DpWide(aircraftToProcess->ExpectedDistance()), targetRect, brush);
+                graphics.DrawString(To1DpWide(aircraftToProcess->ExpectedDistance()), targetRect, brush);
             }
             Components::ClickableArea::Create(
                 targetRect, screenObjectId, "approachTarget" + aircraftToProcess->Callsign(), false)
@@ -277,17 +273,11 @@ namespace UKControllerPlugin::Approach {
             }
 
             auto upButton = Components::Button::Create(
-                upButtonRect,
-                screenObjectId,
-                "moveUp" + aircraftToProcess->Callsign(),
-                Components::UpArrow());
+                upButtonRect, screenObjectId, "moveUp" + aircraftToProcess->Callsign(), Components::UpArrow());
             upButton->Draw(graphics, radarScreen);
 
             auto downButton = Components::Button::Create(
-                downButtonRect,
-                screenObjectId,
-                "moveDown" + aircraftToProcess->Callsign(),
-                Components::DownArrow());
+                downButtonRect, screenObjectId, "moveDown" + aircraftToProcess->Callsign(), Components::DownArrow());
             downButton->Draw(graphics, radarScreen);
 
             auto deleteButton = Components::Button::Create(

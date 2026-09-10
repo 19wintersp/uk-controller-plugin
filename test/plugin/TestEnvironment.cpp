@@ -3,14 +3,17 @@
 
 using UKControllerPlugin::Theme::ThemeManager;
 
-class CoreTestEnvironment : public TestEnvironment {
+class CoreTestEnvironment : public TestEnvironment
+{
     public:
-    void TearDown() {
+    void TearDown()
+    {
         ThemeManager::UnsetInstance();
         TestEnvironment::TearDown();
     }
 };
 
-auto TestEnvironment::CreateEnvironment() -> TestEnvironment* {
+auto TestEnvironment::CreateEnvironment() -> TestEnvironment*
+{
     return new CoreTestEnvironment;
 }

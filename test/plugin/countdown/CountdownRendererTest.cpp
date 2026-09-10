@@ -1,10 +1,10 @@
 #include "countdown/CountdownRenderer.h"
 #include "countdown/CountdownTimer.h"
+#include "countdown/TimerConfigurationManager.h"
+#include "dialog/DialogManager.h"
 #include "euroscope/UserSetting.h"
 #include "helper/TestingFunctions.h"
 #include "plugin/PopupMenuItem.h"
-#include "countdown/TimerConfigurationManager.h"
-#include "dialog/DialogManager.h"
 
 using ::testing::NiceMock;
 using ::testing::Return;

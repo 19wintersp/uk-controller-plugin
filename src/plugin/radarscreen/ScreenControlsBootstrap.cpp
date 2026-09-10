@@ -13,8 +13,7 @@ namespace UKControllerPlugin {
             Bootstraps the radar screen aspect of this module
         */
         void ScreenControlsBootstrap::BootstrapRadarScreen(
-            ConfigurableDisplayCollection configurableDisplays,
-            RadarRenderableCollection& radarRenderables)
+            ConfigurableDisplayCollection configurableDisplays, RadarRenderableCollection& radarRenderables)
         {
             // Add it to the renderables and reserve a clickspot for it
             int rendererId = radarRenderables.ReserveRendererIdentifier();

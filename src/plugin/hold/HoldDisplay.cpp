@@ -747,24 +747,19 @@ namespace UKControllerPlugin {
             graphics.DrawString(ConvertToTchar(hold->description), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
-            graphics.DrawString(
-                std::wstring(L"Fix: ") + ConvertToTchar(this->navaid.identifier), dataRect, textBrush);
+            graphics.DrawString(std::wstring(L"Fix: ") + ConvertToTchar(this->navaid.identifier), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
-            graphics.DrawString(
-                std::wstring(L"Inbound: ") + ConvertToTchar(hold->inbound), dataRect, textBrush);
+            graphics.DrawString(std::wstring(L"Inbound: ") + ConvertToTchar(hold->inbound), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
-            graphics.DrawString(
-                std::wstring(L"Turn: ") + ConvertToTchar(hold->turnDirection), dataRect, textBrush);
+            graphics.DrawString(std::wstring(L"Turn: ") + ConvertToTchar(hold->turnDirection), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
-            graphics.DrawString(
-                std::wstring(L"Maximum: ") + ConvertToTchar(hold->maximum), dataRect, textBrush);
+            graphics.DrawString(std::wstring(L"Maximum: ") + ConvertToTchar(hold->maximum), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
-            graphics.DrawString(
-                std::wstring(L"Minimum: ") + ConvertToTchar(hold->minimum), dataRect, textBrush);
+            graphics.DrawString(std::wstring(L"Minimum: ") + ConvertToTchar(hold->minimum), dataRect, textBrush);
 
             dataRect.Y = dataRect.Y + this->lineHeight + 5;
 
@@ -793,7 +788,8 @@ namespace UKControllerPlugin {
             graphics.DrawRect(this->titleArea, ThemeManager::Pen(PaletteKey::Border));
 
             std::wstring holdName = ConvertToTchar(this->navaid.identifier);
-            graphics.DrawString(ConvertToTchar(this->navaid.identifier), this->titleArea, ThemeManager::Brush(PaletteKey::Text));
+            graphics.DrawString(
+                ConvertToTchar(this->navaid.identifier), this->titleArea, ThemeManager::Brush(PaletteKey::Text));
             graphics.DrawLine(
                 ThemeManager::Pen(PaletteKey::Border),
                 Gdiplus::Point{this->titleArea.X, this->titleArea.Y + this->titleArea.Height},
@@ -845,7 +841,8 @@ namespace UKControllerPlugin {
             radarScreen.RegisterScreenObject(
                 screenObjectId, this->navaid.identifier + "/allLevels", this->allButtonClickRect, false);
 
-            graphics.DrawLine(ThemeManager::Pen(PaletteKey::Border), this->underButtonLineLeft, this->underButtonLineRight);
+            graphics.DrawLine(
+                ThemeManager::Pen(PaletteKey::Border), this->underButtonLineLeft, this->underButtonLineRight);
         }
 
         /*
@@ -923,7 +920,8 @@ namespace UKControllerPlugin {
                     }
 
                     // Render the numbers
-                    graphics.DrawString(GetLevelDisplayString(level), numbersDisplay, ThemeManager::Brush(PaletteKey::Text));
+                    graphics.DrawString(
+                        GetLevelDisplayString(level), numbersDisplay, ThemeManager::Brush(PaletteKey::Text));
 
                     // Increase the lines
                     holdRow.Y = holdRow.Y + this->lineHeight;
@@ -955,7 +953,8 @@ namespace UKControllerPlugin {
 
                         // Render the numbers
                         if (aircraftIndex == 0) {
-                            graphics.DrawString(GetLevelDisplayString(level), numbersDisplay, ThemeManager::Brush(PaletteKey::Text));
+                            graphics.DrawString(
+                                GetLevelDisplayString(level), numbersDisplay, ThemeManager::Brush(PaletteKey::Text));
                         }
 
                         rt = this->plugin.GetRadarTargetForCallsign((*it)->GetCallsign());
@@ -1015,7 +1014,8 @@ namespace UKControllerPlugin {
                                 auto holdProximity = (*it)->GetProximityHold(navaid.identifier);
                                 if (holdProximity != nullptr && holdProximity->HasEntered()) {
                                     std::wstring timeString = GetTimeInHoldDisplayString(holdProximity->EnteredAt());
-                                    graphics.DrawString(timeString, timeInHoldDisplay, ThemeManager::Brush(PaletteKey::Text));
+                                    graphics.DrawString(
+                                        timeString, timeInHoldDisplay, ThemeManager::Brush(PaletteKey::Text));
                                 }
                             }
                         }

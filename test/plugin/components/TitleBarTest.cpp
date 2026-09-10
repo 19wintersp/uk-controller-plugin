@@ -32,17 +32,14 @@ namespace UKControllerPluginTest::Components {
 
     TEST_F(TitleBarTest, TestItDrawsBackground)
     {
-        EXPECT_CALL(this->mockGraphics, FillRectRect(GdiRectEq(Gdiplus::Rect{10, 20, 100, 100}), _))
-            .Times(1);
+        EXPECT_CALL(this->mockGraphics, FillRectRect(GdiRectEq(Gdiplus::Rect{10, 20, 100, 100}), _)).Times(1);
 
         this->titlebar->Draw(mockGraphics, mockRadarScreen);
     }
 
     TEST_F(TitleBarTest, TestItDrawsText)
     {
-        EXPECT_CALL(
-            this->mockGraphics,
-            DrawStringRect(this->title, GdiRectEq(Gdiplus::Rect{10, 20, 100, 100}), _))
+        EXPECT_CALL(this->mockGraphics, DrawStringRect(this->title, GdiRectEq(Gdiplus::Rect{10, 20, 100, 100}), _))
             .Times(1);
 
         this->titlebar->Draw(mockGraphics, mockRadarScreen);
@@ -50,8 +47,7 @@ namespace UKControllerPluginTest::Components {
 
     TEST_F(TitleBarTest, TestItDrawsBorder)
     {
-        EXPECT_CALL(this->mockGraphics, DrawRectRect(GdiRectEq(Gdiplus::Rect{10, 20, 100, 100}), _))
-            .Times(1);
+        EXPECT_CALL(this->mockGraphics, DrawRectRect(GdiRectEq(Gdiplus::Rect{10, 20, 100, 100}), _)).Times(1);
 
         this->titlebar->Draw(mockGraphics, mockRadarScreen);
     }

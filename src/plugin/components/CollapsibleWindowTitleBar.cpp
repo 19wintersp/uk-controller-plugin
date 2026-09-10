@@ -5,10 +5,7 @@
 namespace UKControllerPlugin::Components {
 
     CollapsibleWindowTitleBar::CollapsibleWindowTitleBar(
-        const std::wstring& title,
-        Gdiplus::Rect area,
-        const std::function<bool()>& collapseState,
-        int screenObjectId)
+        const std::wstring& title, Gdiplus::Rect area, const std::function<bool()>& collapseState, int screenObjectId)
         : TitleBar(title, area)
     {
         this->closeButton = Button::Create(
@@ -25,13 +22,9 @@ namespace UKControllerPlugin::Components {
     }
 
     std::shared_ptr<CollapsibleWindowTitleBar> CollapsibleWindowTitleBar::Create(
-        const std::wstring& title,
-        Gdiplus::Rect area,
-        const std::function<bool()>& collapseState,
-        int screenObjectId)
+        const std::wstring& title, Gdiplus::Rect area, const std::function<bool()>& collapseState, int screenObjectId)
     {
-        auto titlebar =
-            std::make_shared<CollapsibleWindowTitleBar>(title, area, collapseState, screenObjectId);
+        auto titlebar = std::make_shared<CollapsibleWindowTitleBar>(title, area, collapseState, screenObjectId);
         titlebar->WithDrag(screenObjectId);
 
         return titlebar;

@@ -102,8 +102,7 @@ namespace UKControllerPlugin::Components {
         return CollapseButton(colour, []() { return false; });
     }
 
-    std::function<void(Windows::GdiGraphicsInterface&, const Gdiplus::Rect&)>
-    UpArrow()
+    std::function<void(Windows::GdiGraphicsInterface&, const Gdiplus::Rect&)> UpArrow()
     {
         return CollapseButton([]() { return false; });
     }
@@ -113,8 +112,7 @@ namespace UKControllerPlugin::Components {
         return CollapseButton(colour, []() { return true; });
     }
 
-    std::function<void(Windows::GdiGraphicsInterface&, const Gdiplus::Rect&)>
-    DownArrow()
+    std::function<void(Windows::GdiGraphicsInterface&, const Gdiplus::Rect&)> DownArrow()
     {
         return CollapseButton([]() { return true; });
     }

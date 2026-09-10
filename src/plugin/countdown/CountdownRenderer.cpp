@@ -21,9 +21,9 @@ namespace UKControllerPlugin::Countdown {
         int timeDisplayClickspotId,
         int closeClickspotId,
         int toogleCallbackFunctionId)
-        : countdownModule(countdownModule), configManager(configManager),
-          functionsClickspotId(functionsClickspotId), timeDisplayClickspotId(timeDisplayClickspotId),
-          closeClickspotId(closeClickspotId), toggleCallbackFunctionId(toogleCallbackFunctionId)
+        : countdownModule(countdownModule), configManager(configManager), functionsClickspotId(functionsClickspotId),
+          timeDisplayClickspotId(timeDisplayClickspotId), closeClickspotId(closeClickspotId),
+          toggleCallbackFunctionId(toogleCallbackFunctionId)
     {
     }
 
@@ -244,7 +244,9 @@ namespace UKControllerPlugin::Countdown {
             graphics.FillRect(this->timerButtonAreas[it->timerId], ThemeManager::Brush(PaletteKey::Background));
             graphics.DrawRect(this->timerButtonAreas[it->timerId], ThemeManager::Pen(PaletteKey::Border));
             graphics.DrawString(
-                std::to_wstring(it->timerDuration), this->timerButtonAreas[it->timerId], ThemeManager::Brush(PaletteKey::Text));
+                std::to_wstring(it->timerDuration),
+                this->timerButtonAreas[it->timerId],
+                ThemeManager::Brush(PaletteKey::Text));
             radarScreen.RegisterScreenObject(
                 this->functionsClickspotId,
                 "timer" + std::to_string(it->timerId) + "Toggle",

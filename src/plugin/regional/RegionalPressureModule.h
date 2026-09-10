@@ -1,7 +1,7 @@
 #pragma once
 #include "api/ApiInterface.h"
-#include "dialog/DialogManager.h"
 #include "dependency/DependencyLoaderInterface.h"
+#include "dialog/DialogManager.h"
 
 // Forward declare
 namespace UKControllerPlugin {

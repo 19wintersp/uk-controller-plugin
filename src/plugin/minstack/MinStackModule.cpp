@@ -1,5 +1,5 @@
-#include "MinStackConfigurationDialog.h"
 #include "MinStackModule.h"
+#include "MinStackConfigurationDialog.h"
 #include "MinStackRenderer.h"
 #include "api/ApiException.h"
 #include "euroscope/AsrEventHandlerCollection.h"

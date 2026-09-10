@@ -45,8 +45,7 @@ namespace UKControllerPluginTest {
             HoldRendererTest()
                 : popupFactory(functionHandlers, mockPlugin), callsignSelectionFactory(popupFactory),
                   dialogManager(mockDialog), userSetting(mockUserSettingProvider), holdManager(mockApi, mockTaskRunner),
-                  displayFactory(
-                      mockPlugin, holdManager, navaids, holds, dialogManager, callsignSelectionFactory),
+                  displayFactory(mockPlugin, holdManager, navaids, holds, dialogManager, callsignSelectionFactory),
                   displayManager(new HoldDisplayManager(displayFactory)), renderer(displayManager, 1, 2)
             {
                 this->holds.Add({1, "WILLO", "WILLO", 8000, 15000, 209, "left", {}});

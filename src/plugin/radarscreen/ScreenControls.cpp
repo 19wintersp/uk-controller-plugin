@@ -13,10 +13,8 @@ using UKControllerPlugin::Theme::ThemeManager;
 
 namespace UKControllerPlugin::RadarScreen {
 
-    ScreenControls::ScreenControls(
-        int toggleboxIdEuroscope, ConfigurableDisplayCollection configurableDisplays)
-        : configurableDisplays(std::move(configurableDisplays)),
-          toggleboxIdEuroscope(toggleboxIdEuroscope)
+    ScreenControls::ScreenControls(int toggleboxIdEuroscope, ConfigurableDisplayCollection configurableDisplays)
+        : configurableDisplays(std::move(configurableDisplays)), toggleboxIdEuroscope(toggleboxIdEuroscope)
     {
     }
 

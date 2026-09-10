@@ -16,10 +16,9 @@ using UKControllerPlugin::Euroscope::UserSettingAwareCollection;
 namespace UKControllerPlugin {
     namespace Euroscope {
 
-        GeneralSettingsDialog::GeneralSettingsDialog(
-            Bootstrap::PersistenceContainer& container)
-            : userSettings(*container.pluginUserSettingHandler), themeSettings(*container.themeSettings), userSettingsHandlers(*container.userSettingHandlers),
-              settings(*container.settingsRepository)
+        GeneralSettingsDialog::GeneralSettingsDialog(Bootstrap::PersistenceContainer& container)
+            : userSettings(*container.pluginUserSettingHandler), themeSettings(*container.themeSettings),
+              userSettingsHandlers(*container.userSettingHandlers), settings(*container.settingsRepository)
         {
         }
 
@@ -95,11 +94,7 @@ namespace UKControllerPlugin {
                     hwnd, IDC_COLOUR_PALETTE, CB_INSERTSTRING, NULL, reinterpret_cast<LPARAM>(palette->GetName()));
 
                 SendDlgItemMessage(
-                    hwnd,
-                    IDC_COLOUR_PALETTE,
-                    CB_SETITEMDATA,
-                    insertIndex,
-                    reinterpret_cast<LPARAM>(palette->GetId()));
+                    hwnd, IDC_COLOUR_PALETTE, CB_SETITEMDATA, insertIndex, reinterpret_cast<LPARAM>(palette->GetId()));
 
                 if (palette->GetId() == selectedColourPalette) {
                     SendDlgItemMessage(hwnd, IDC_COLOUR_PALETTE, CB_SETCURSEL, insertIndex, NULL);

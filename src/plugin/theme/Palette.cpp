@@ -7,16 +7,18 @@ namespace UKControllerPlugin::Theme {
         return entries[static_cast<std::size_t>(key)];
     }
 
-    auto Palette::GetId() const -> const char * {
+    auto Palette::GetId() const -> const char*
+    {
         return id;
     }
 
-    auto Palette::GetName() const -> const wchar_t * {
+    auto Palette::GetName() const -> const wchar_t*
+    {
         return name;
     }
 
     constexpr Palette::Palette(
-        const char* id_, const wchar_t* name_, std::initializer_list<std::pair<PaletteKey, const char *>> entries_)
+        const char* id_, const wchar_t* name_, std::initializer_list<std::pair<PaletteKey, const char*>> entries_)
         : id(id_), name(name_)
     {
         for (const auto [key, entry] : entries_)
@@ -27,7 +29,7 @@ namespace UKControllerPlugin::Theme {
         const char* id_,
         const wchar_t* name_,
         const Palette& base,
-        std::initializer_list<std::pair<PaletteKey, const char *>> overrides)
+        std::initializer_list<std::pair<PaletteKey, const char*>> overrides)
         : id(id_), name(name_)
     {
         for (std::size_t i = 0; i < PALETTE_KEY_COUNT; ++i)

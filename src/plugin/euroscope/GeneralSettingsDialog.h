@@ -45,7 +45,7 @@ namespace UKControllerPlugin::Euroscope {
         // A place where user settings are retrieved and stored
         UKControllerPlugin::Euroscope::UserSetting& userSettings;
 
-        Theme::ThemeSettings &themeSettings;
+        Theme::ThemeSettings& themeSettings;
 
         // A set of handlers that want to know when user settings get updated
         const UKControllerPlugin::Euroscope::UserSettingAwareCollection& userSettingsHandlers;

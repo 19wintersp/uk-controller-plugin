@@ -27,8 +27,8 @@ namespace UKControllerPlugin::MinStack {
         int mslClickspotId,
         int toggleCallbackFunctionId,
         const UKControllerPlugin::Dialog::DialogManager& dialogManager)
-        : minStackModule(minStackModule), dialogManager(dialogManager),
-          hideClickspotId(closeClickspotId), menuBarClickspotId(menuBarClickspotId), mslClickspotId(mslClickspotId),
+        : minStackModule(minStackModule), dialogManager(dialogManager), hideClickspotId(closeClickspotId),
+          menuBarClickspotId(menuBarClickspotId), mslClickspotId(mslClickspotId),
           toggleCallbackFunctionId(toggleCallbackFunctionId)
     {
     }

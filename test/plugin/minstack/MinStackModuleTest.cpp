@@ -1,12 +1,12 @@
 #include "minstack/MinStackModule.h"
-#include "minstack/MinStackManager.h"
-#include "curl/CurlResponse.h"
-#include "plugin/FunctionCallEventHandler.h"
-#include "radarscreen/RadarRenderableCollection.h"
-#include "radarscreen/ConfigurableDisplayCollection.h"
-#include "euroscope/AsrEventHandlerCollection.h"
 #include "curl/CurlRequest.h"
+#include "curl/CurlResponse.h"
+#include "euroscope/AsrEventHandlerCollection.h"
+#include "minstack/MinStackManager.h"
+#include "plugin/FunctionCallEventHandler.h"
 #include "push/PushEventProcessorCollection.h"
+#include "radarscreen/ConfigurableDisplayCollection.h"
+#include "radarscreen/RadarRenderableCollection.h"
 
 using ::testing::_;
 using ::testing::NiceMock;

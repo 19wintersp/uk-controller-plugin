@@ -1,13 +1,13 @@
-#include "bootstrap/PersistenceContainer.h"
 #include "countdown/CountdownModule.h"
+#include "bootstrap/PersistenceContainer.h"
 #include "countdown/CountdownTimer.h"
+#include "countdown/GlobalCountdownSettingFunctions.h"
 #include "countdown/TimerConfigurationManager.h"
-#include "plugin/FunctionCallEventHandler.h"
-#include "radarscreen/RadarRenderableCollection.h"
-#include "radarscreen/ConfigurableDisplayCollection.h"
 #include "euroscope/AsrEventHandlerCollection.h"
 #include "euroscope/UserSettingAwareCollection.h"
-#include "countdown/GlobalCountdownSettingFunctions.h"
+#include "plugin/FunctionCallEventHandler.h"
+#include "radarscreen/ConfigurableDisplayCollection.h"
+#include "radarscreen/RadarRenderableCollection.h"
 
 using ::testing::_;
 using ::testing::NiceMock;
