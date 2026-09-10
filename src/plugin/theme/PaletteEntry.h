@@ -11,15 +11,13 @@ namespace UKControllerPlugin::Theme {
     class PaletteEntry
     {
         public:
-        constexpr PaletteEntry()
+        constexpr PaletteEntry() = default;
+
+        explicit constexpr PaletteEntry(Gdiplus::ARGB argb) : value(argb)
         {
         }
 
-        constexpr PaletteEntry(Gdiplus::ARGB argb) : value(argb)
-        {
-        }
-
-        constexpr PaletteEntry(const char* hex)
+        explicit constexpr PaletteEntry(const char* hex)
         {
             value = 0xff;
 

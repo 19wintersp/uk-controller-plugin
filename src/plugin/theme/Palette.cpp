@@ -16,24 +16,24 @@ namespace UKControllerPlugin::Theme {
     }
 
     constexpr Palette::Palette(
-        const char* id_, const wchar_t* name_, std::initializer_list<std::pair<PaletteKey, PaletteEntry>> entries_)
+        const char* id_, const wchar_t* name_, std::initializer_list<std::pair<PaletteKey, const char *>> entries_)
         : id(id_), name(name_)
     {
         for (const auto [key, entry] : entries_)
-            entries[static_cast<std::size_t>(key)] = entry;
+            entries[static_cast<std::size_t>(key)] = PaletteEntry(entry);
     }
 
     constexpr Palette::Palette(
         const char* id_,
         const wchar_t* name_,
         const Palette& base,
-        std::initializer_list<std::pair<PaletteKey, PaletteEntry>> overrides)
+        std::initializer_list<std::pair<PaletteKey, const char *>> overrides)
         : id(id_), name(name_)
     {
         for (std::size_t i = 0; i < PALETTE_KEY_COUNT; ++i)
             entries[i] = base.entries[i];
         for (const auto [key, entry] : overrides)
-            entries[static_cast<std::size_t>(key)] = entry;
+            entries[static_cast<std::size_t>(key)] = PaletteEntry(entry);
     }
 
     // clang-format off

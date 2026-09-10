@@ -34,7 +34,9 @@ namespace UKControllerPlugin::Components {
         TitleBar(std::wstring title, Gdiplus::Rect area);
 
         private:
-        Theme::PaletteKey background = Theme::PaletteKey::Header, text = Theme::PaletteKey::Text, border = Theme::PaletteKey::Border;
+        Theme::PaletteKey background = Theme::PaletteKey::Header;
+        Theme::PaletteKey text = Theme::PaletteKey::Text;
+        Theme::PaletteKey border = Theme::PaletteKey::Border;
         std::shared_ptr<ClickableArea> clickableArea = nullptr;
         std::wstring title;
         Gdiplus::Rect area;

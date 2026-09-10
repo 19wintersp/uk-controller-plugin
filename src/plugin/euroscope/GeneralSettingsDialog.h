@@ -24,7 +24,7 @@ namespace UKControllerPlugin::Euroscope {
     class GeneralSettingsDialog
     {
         public:
-        GeneralSettingsDialog(Bootstrap::PersistenceContainer& container);
+        explicit GeneralSettingsDialog(Bootstrap::PersistenceContainer& container);
 
         static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 

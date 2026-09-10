@@ -12,7 +12,7 @@ namespace UKControllerPlugin::Theme {
     class ThemeUserSettingHandler : public Euroscope::UserSettingAwareInterface
     {
         public:
-        ThemeUserSettingHandler(std::shared_ptr<ThemeSettings> settings);
+        explicit ThemeUserSettingHandler(std::shared_ptr<ThemeSettings> settings);
         void UserSettingsUpdated(Euroscope::UserSetting& userSettings) override;
         void UserSettingsUpdated();
 

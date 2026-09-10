@@ -16,7 +16,7 @@ namespace UKControllerPlugin::Theme {
     class ThemeSettings
     {
         public:
-        ThemeSettings(Euroscope::UserSetting& userSettings);
+        explicit ThemeSettings(Euroscope::UserSetting& userSettings);
 
         [[nodiscard]] auto Palette() const -> std::string;
 

@@ -19,12 +19,12 @@ namespace UKControllerPlugin::Theme {
         [[nodiscard]] static auto GetPalette(const char* id) -> const Palette*;
 
         constexpr Palette(
-            const char* id, const wchar_t* name, std::initializer_list<std::pair<PaletteKey, PaletteEntry>> entries);
+            const char* id, const wchar_t* name, std::initializer_list<std::pair<PaletteKey, const char *>> entries);
         constexpr Palette(
             const char* id,
             const wchar_t* name,
             const Palette& base,
-            std::initializer_list<std::pair<PaletteKey, PaletteEntry>> overrides);
+            std::initializer_list<std::pair<PaletteKey, const char *>> overrides);
 
         constexpr static const char *DEFAULT = "default";
 
