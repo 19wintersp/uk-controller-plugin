@@ -1,8 +1,14 @@
 #include "MockGraphicsInterface.h"
+#include "theme/ThemeManager.h"
+
+using UKControllerPlugin::Theme::ThemeManager;
 
 namespace UKControllerPluginTest::Windows {
     MockGraphicsInterface::MockGraphicsInterface() = default;
-    MockGraphicsInterface::~MockGraphicsInterface() = default;
+
+    MockGraphicsInterface::~MockGraphicsInterface() {
+        ThemeManager::UnsetInstance();
+    }
 
     void MockGraphicsInterface::Clipped(Gdiplus::Region&, std::function<void()> func)
     {

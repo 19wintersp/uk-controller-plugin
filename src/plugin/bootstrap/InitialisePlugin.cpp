@@ -64,6 +64,7 @@
 #include "stands/StandModule.h"
 #include "task/RunAsyncTask.h"
 #include "task/TaskRunnerInterface.h"
+#include "theme/ThemeManager.h"
 #include "theme/ThemeModule.h"
 #include "update/PluginVersion.h"
 #include "wake/WakeModule.h"
@@ -95,6 +96,7 @@ using UKControllerPlugin::Plugin::PluginVersion;
 using UKControllerPlugin::Prenote::PrenoteModule;
 using UKControllerPlugin::Regional::RegionalPressureModule;
 using UKControllerPlugin::Squawk::SquawkModule;
+using UKControllerPlugin::Theme::ThemeManager;
 using UKControllerPlugin::Theme::ThemeModule;
 
 namespace UKControllerPlugin {
@@ -108,6 +110,8 @@ namespace UKControllerPlugin {
         UnsetTaskRunner();
         this->container.reset();
         this->duplicatePlugin.reset();
+
+        ThemeManager::UnsetInstance();
 
         // Shut down winsock
         if (this->winsockInitialised) {
