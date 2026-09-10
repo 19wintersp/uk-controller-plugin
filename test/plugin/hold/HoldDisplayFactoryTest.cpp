@@ -1,15 +1,15 @@
-#include "hold/HoldDisplayFactory.h"
 #include "aircraft/CallsignSelectionListFactory.h"
 #include "dialog/DialogManager.h"
 #include "hold/AbstractHoldLevelRestriction.h"
 #include "hold/DeemedSeparatedHold.h"
 #include "hold/HoldDisplay.h"
+#include "hold/HoldDisplayFactory.h"
 #include "hold/HoldManager.h"
 #include "hold/HoldingData.h"
 #include "hold/PublishedHoldCollection.h"
 #include "list/PopupListFactory.h"
-#include "navaids/Navaid.h"
 #include "navaids/NavaidCollection.h"
+#include "navaids/Navaid.h"
 #include "plugin/FunctionCallEventHandler.h"
 
 using ::testing::NiceMock;

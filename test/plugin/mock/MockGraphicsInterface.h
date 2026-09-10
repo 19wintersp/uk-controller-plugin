@@ -9,9 +9,6 @@ namespace UKControllerPluginTest {
             public:
             MockGraphicsInterface();
             virtual ~MockGraphicsInterface();
-            MockGraphicsInterface(const MockGraphicsInterface&) = delete;
-            MockGraphicsInterface& operator=(const MockGraphicsInterface&) = delete;
-
             MOCK_METHOD3(DrawLine, void(const Gdiplus::Pen&, const Gdiplus::Point&, const Gdiplus::Point&));
             MOCK_METHOD2(DrawPath, void(const Gdiplus::GraphicsPath&, const Gdiplus::Pen&));
             MOCK_METHOD2(DrawRectRectF, void(const Gdiplus::RectF&, const Gdiplus::Pen&));

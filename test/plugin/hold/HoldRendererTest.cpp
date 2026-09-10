@@ -1,18 +1,18 @@
-#include "hold/HoldRenderer.h"
 #include "aircraft/CallsignSelectionListFactory.h"
-#include "dialog/DialogManager.h"
 #include "euroscope/UserSetting.h"
 #include "hold/AbstractHoldLevelRestriction.h"
 #include "hold/DeemedSeparatedHold.h"
+#include "hold/HoldRenderer.h"
 #include "hold/HoldDisplay.h"
-#include "hold/HoldDisplayFactory.h"
 #include "hold/HoldDisplayManager.h"
 #include "hold/HoldManager.h"
-#include "hold/PublishedHoldCollection.h"
+#include "hold/HoldDisplayFactory.h"
 #include "list/PopupListFactory.h"
-#include "navaids/NavaidCollection.h"
 #include "plugin/FunctionCallEventHandler.h"
 #include "plugin/PopupMenuItem.h"
+#include "navaids/NavaidCollection.h"
+#include "hold/PublishedHoldCollection.h"
+#include "dialog/DialogManager.h"
 
 using ::testing::NiceMock;
 using ::testing::Return;
