@@ -5,10 +5,7 @@ using UKControllerPlugin::Theme::ThemeManager;
 
 namespace UKControllerPluginTest::Windows {
     MockGraphicsInterface::MockGraphicsInterface() = default;
-
-    MockGraphicsInterface::~MockGraphicsInterface() {
-        ThemeManager::UnsetInstance();
-    }
+    MockGraphicsInterface::~MockGraphicsInterface() = default;
 
     void MockGraphicsInterface::Clipped(Gdiplus::Region&, std::function<void()> func)
     {

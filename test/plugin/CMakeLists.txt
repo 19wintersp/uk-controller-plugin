@@ -582,6 +582,7 @@ set(test__stands
 source_group("test\\stands" FILES ${test__stands})
 
 set(test__tag
+    "tag/RadarScreenTagFunctionTest.cpp"
     "tag/TagDataTest.cpp"
     "tag/TagFunctionTest.cpp"
     "tag/TagItemCollectionTest.cpp"
@@ -622,6 +623,7 @@ set(test__wake
 source_group("test\\wake" FILES ${test__wake})
 
 set(ALL_FILES
+    TestEnvironment.cpp
     ${test__aircraft}
     ${test__airfield}
     ${test__api}
@@ -682,7 +684,7 @@ set(ALL_FILES
     ${test__timedevent}
     ${test__timer}
     ${test__wake}
-    $<TARGET_OBJECTS:UKControllerPluginCore> intention/IntentionCodeBootstrapProviderTest.cpp tag/RadarScreenTagFunctionTest.cpp)
+    $<TARGET_OBJECTS:UKControllerPluginCore>)
 
 ################################################################################
 # Target
