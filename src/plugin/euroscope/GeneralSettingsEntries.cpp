@@ -37,9 +37,5 @@ namespace UKControllerPlugin {
         const std::string GeneralSettingsEntries::initialHeadingToggleSettingsDescription =
             "Automatically assign initial headings";
 
-        // Colour Palette
-        const std::string GeneralSettingsEntries::colourPaletteSettingsKey = "colourPalette";
-        const std::string GeneralSettingsEntries::colourPaletteSettingsDescription = "UKCP Colour Palette";
-
     } // namespace Euroscope
 } // namespace UKControllerPlugin
