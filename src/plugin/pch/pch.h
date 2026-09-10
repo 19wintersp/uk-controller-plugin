@@ -40,6 +40,7 @@ using std::min;
 #include <shobjidl.h>
 #include <algorithm>
 #include <any>
+#include <array>
 #include <cctype>
 #include <codecvt>
 #include <ctime>

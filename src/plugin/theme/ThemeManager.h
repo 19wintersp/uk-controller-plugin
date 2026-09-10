@@ -30,9 +30,9 @@ namespace UKControllerPlugin::Theme {
 
         inline static std::unique_ptr<ThemeManager> instance;
 
-        Gdiplus::Color colours[PALETTE_KEY_COUNT];
-        std::unique_ptr<Gdiplus::SolidBrush> brushes[PALETTE_KEY_COUNT];
-        std::unique_ptr<Gdiplus::Pen> pens[PALETTE_KEY_COUNT];
+        std::array<Gdiplus::Color, PALETTE_KEY_COUNT> colours;
+        std::array<std::unique_ptr<Gdiplus::SolidBrush>, PALETTE_KEY_COUNT> brushes;
+        std::array<std::unique_ptr<Gdiplus::Pen>, PALETTE_KEY_COUNT> pens;
     };
 
 } // namespace UKControllerPlugin::Theme

@@ -31,7 +31,7 @@ namespace UKControllerPlugin::Theme {
         private:
         const char* id;
         const wchar_t* name;
-        PaletteEntry entries[PALETTE_KEY_COUNT];
+        std::array<PaletteEntry, PALETTE_KEY_COUNT> entries;
 
         static const std::vector<const Palette*> PALETTES;
     };

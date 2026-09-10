@@ -6,7 +6,7 @@ using UKControllerPlugin::Theme::ThemeManager;
 class CoreTestEnvironment : public TestEnvironment
 {
     public:
-    void TearDown()
+    void TearDown() override
     {
         ThemeManager::UnsetInstance();
         TestEnvironment::TearDown();
