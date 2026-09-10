@@ -31,9 +31,10 @@ namespace UKControllerPluginTest {
         class GeneralSettingsConfigurationBootstrapTest : public Test
         {
             public:
-            GeneralSettingsConfigurationBootstrapTest() {}
+            GeneralSettingsConfigurationBootstrapTest() = default;
 
-            void BootstrapContainer() {
+            void BootstrapContainer()
+            {
                 container.windows = std::make_unique<NiceMock<Windows::MockWinApi>>();
                 container.pluginUserSettingHandler = std::make_unique<UserSetting>(mockUserSettingProvider);
                 container.dialogManager = std::make_unique<DialogManager>(mockDialogProvider);
