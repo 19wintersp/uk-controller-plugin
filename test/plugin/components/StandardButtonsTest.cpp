@@ -3,6 +3,7 @@
 using testing::_;
 using UKControllerPlugin::Components::CloseButton;
 using UKControllerPlugin::Components::CollapseButton;
+using UKControllerPlugin::Theme::PaletteKey;
 
 namespace UKControllerPluginTest::Components {
 
@@ -25,15 +26,15 @@ namespace UKControllerPluginTest::Components {
         EXPECT_NE(nullptr, button.target_type().name());
     }
 
-    TEST_F(StandardButtonsTest, CloseButtonWithColorDoesNotCrash)
+    TEST_F(StandardButtonsTest, CloseButtonWithPaletteKeyDoesNotCrash)
     {
-        auto button = CloseButton(Gdiplus::Color(255, 0, 0));
+        auto button = CloseButton(PaletteKey::Background);
         EXPECT_NE(nullptr, button.target_type().name());
     }
 
-    TEST_F(StandardButtonsTest, CollapseButtonWithColorDoesNotCrash)
+    TEST_F(StandardButtonsTest, CollapseButtonWithPaletteKeyDoesNotCrash)
     {
-        auto button = CollapseButton(Gdiplus::Color(255, 0, 0), []() { return false; });
+        auto button = CollapseButton(PaletteKey::Background, []() { return false; });
         EXPECT_NE(nullptr, button.target_type().name());
     }
 } // namespace UKControllerPluginTest::Components

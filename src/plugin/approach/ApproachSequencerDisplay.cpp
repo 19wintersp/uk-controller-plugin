@@ -300,7 +300,7 @@ namespace UKControllerPlugin::Approach {
                             drawArea,
                             screenObjectId,
                             "toggleDraw" + aircraftToProcess->Callsign(),
-                            Components::DeleteButton(ThemeManager::Colour(PaletteKey::Background)))
+                            Components::DeleteButton(PaletteKey::Background))
                             ->Draw(graphics, radarScreen);
                     }
                 });
