@@ -2,7 +2,8 @@
 
 namespace UKControllerPlugin::VersionChecker {
 
-    auto VersionInterface::IsUpdateRequired(const std::string &current, const std::string &latest) -> bool {
+    auto VersionInterface::IsUpdateRequired(const std::string& current, const std::string& latest) -> bool
+    {
         return current != latest;
     }
 

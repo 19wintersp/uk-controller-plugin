@@ -8,13 +8,14 @@ namespace UKControllerPlugin::Bootstrap {
 
 namespace UKControllerPlugin::VersionChecker {
 
-    class VersionCheckerModule {
+    class VersionCheckerModule
+    {
         public:
-        static void BootstrapPlugin(Bootstrap::PersistenceContainer &container);
+        static void BootstrapPlugin(Bootstrap::PersistenceContainer& container);
 
         private:
-        static void Check(VersionInterface &&iface, const char *label);
-        static auto GetVersion(std::function<std::string()> function, const char *label) -> std::string;
+        static void Check(VersionInterface&& iface, const char* label);
+        static auto GetVersion(std::function<std::string()> function, const char* label) -> std::string;
     };
 
 } // namespace UKControllerPlugin::VersionChecker

@@ -4,7 +4,8 @@
 
 namespace UKControllerPlugin::VersionChecker {
 
-    class EuroscopeVersion : public VersionInterface {
+    class EuroscopeVersion : public VersionInterface
+    {
         public:
         EuroscopeVersion() = default;
 

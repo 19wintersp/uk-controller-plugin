@@ -8,16 +8,17 @@ namespace UKControllerPlugin::Windows {
 
 namespace UKControllerPlugin::VersionChecker {
 
-    class SectorFileProviderVersion : public VersionInterface {
+    class SectorFileProviderVersion : public VersionInterface
+    {
         public:
-        SectorFileProviderVersion(Windows::WinApiInterface &windows);
+        SectorFileProviderVersion(Windows::WinApiInterface& windows);
 
         auto GetCurrentVersion() -> std::string override;
         auto GetLatestVersion() -> std::string override;
         auto GetUpdateMessage() -> std::string override;
 
         private:
-        Windows::WinApiInterface &windows;
+        Windows::WinApiInterface& windows;
     };
 
 } // namespace UKControllerPlugin::VersionChecker

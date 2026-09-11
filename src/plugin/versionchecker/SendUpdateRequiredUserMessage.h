@@ -9,13 +9,15 @@ namespace UKControllerPlugin::Euroscope {
 
 namespace UKControllerPlugin::VersionChecker {
 
-    class SendUpdateRequiredUserMessage : public UKControllerPluginUtils::EventHandler::EventHandler<UpdateRequiredEvent> {
+    class SendUpdateRequiredUserMessage
+        : public UKControllerPluginUtils::EventHandler::EventHandler<UpdateRequiredEvent>
+    {
         public:
-        SendUpdateRequiredUserMessage(Euroscope::EuroscopePluginLoopbackInterface &plugin);
+        SendUpdateRequiredUserMessage(Euroscope::EuroscopePluginLoopbackInterface& plugin);
         void OnEvent(const UpdateRequiredEvent& event) override;
 
         private:
-        Euroscope::EuroscopePluginLoopbackInterface &plugin;
+        Euroscope::EuroscopePluginLoopbackInterface& plugin;
     };
 
 } // namespace UKControllerPlugin::VersionChecker

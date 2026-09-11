@@ -6,7 +6,7 @@
 
 namespace UKControllerPlugin::VersionChecker {
 
-    constexpr const char *WILDCARD_VERSION = "dev";
+    constexpr const char* WILDCARD_VERSION = "dev";
 
     const std::wstring VERSION_FILE_PATH = L"UK/Data/Sector/pack_version.txt";
     const std::string LATEST_VERSION_URL = "https://docs.vatsim.uk/General/Software%20Downloads/Files/pack_version.txt";
