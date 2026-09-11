@@ -17,7 +17,7 @@ namespace UKControllerPlugin::Windows {
         virtual auto CreateFolderRecursive(std::wstring folder) -> bool = 0;
         virtual auto CreateLocalFolderRecursive(std::wstring folder) -> bool = 0;
         virtual auto DeleteGivenFile(std::wstring filename) -> bool = 0;
-        virtual auto FileExists(std::wstring filename) -> bool = 0;
+        virtual auto FileExists(std::wstring filename, bool relativePath = true) -> bool = 0;
         virtual auto FileOpenDialog(std::wstring title, UINT numFileTypes, const COMDLG_FILTERSPEC* fileTypes) const
             -> std::wstring = 0;
         [[nodiscard]] auto GetDllInstance() const -> HINSTANCE;
